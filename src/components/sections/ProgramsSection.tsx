@@ -111,14 +111,28 @@ export const ProgramsSection: React.FC = () => {
           {mathProg && (
             <div className="rounded-3xl bg-gradient-to-b from-white to-sky-50/40 border-2 border-cyan-400/40 shadow-card hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between p-7 sm:p-9 relative">
               <div>
-                {/* Badge Header */}
+                {/* Pricing & Badge Header */}
                 <div className="flex items-center justify-between mb-5">
-                  <span className="px-3.5 py-1 rounded-full bg-cyan-100 text-brand-primary-deep font-extrabold text-xs tracking-wider uppercase border border-cyan-200">
-                    Flagship Program
-                  </span>
-                  <span className="text-xs font-semibold text-cyan-800 bg-white/80 px-2.5 py-1 rounded-lg border border-slate-200">
-                    Grades 1 – 10
-                  </span>
+                  <div className="space-y-0.5">
+                    <span className="block text-xs font-bold text-slate-400 line-through">
+                      {mathProg.originalPrice || '₹14,999'}
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-xl sm:text-2xl font-display font-black text-brand-primary-deep">
+                        {mathProg.discountedPrice || '₹4,999'}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-500">/ term</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="px-3.5 py-1 rounded-2xl bg-cyan-100 text-brand-primary-deep font-extrabold text-xs tracking-wider uppercase border border-cyan-200">
+                      Flagship
+                    </span>
+                    <span className="text-xs font-semibold text-cyan-800 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200">
+                      Grades 1 – 10
+                    </span>
+                  </div>
                 </div>
 
                 {/* Title & Tagline */}
@@ -144,17 +158,16 @@ export const ProgramsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: Same Color As Card 1 */}
               <div className="pt-8 space-y-3">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="w-full justify-center text-base font-bold shadow-md hover:shadow-lg"
+                <button
+                  type="button"
                   onClick={() => handleEnquire(mathProg.title)}
+                  className="w-full py-3.5 px-6 rounded-2xl bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                 >
-                  <BookOpen className="w-4 h-4 mr-1.5" />
+                  <BookOpen className="w-4 h-4 text-slate-900" />
                   <span>Enquire & Book Diagnostic</span>
-                </Button>
+                </button>
 
                 <div className="text-center">
                   <Link

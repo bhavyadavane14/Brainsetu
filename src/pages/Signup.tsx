@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { User, Mail, Lock, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
+import { User, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { BrainSetuLogo } from '../assets/logo/BrainSetuLogo';
 import { Button } from '../components/common/Button';
@@ -15,7 +15,7 @@ export const Signup: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const { signup, loginWithGoogle, isFirebaseActive } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -86,16 +86,6 @@ export const Signup: React.FC = () => {
             {/* Top Accent Bar */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-secondary via-brand-primary to-brand-accent"></div>
 
-            {/* Mode Banner */}
-            <div className="mb-6 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between text-xs text-slate-600">
-              <div className="flex items-center gap-1.5">
-                <span className={`w-2 h-2 rounded-full ${isFirebaseActive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'}`}></span>
-                <span className="font-medium">
-                  {isFirebaseActive ? 'Connected to Firebase Cloud DB' : 'Direct Instant Access (Local DB Mode)'}
-                </span>
-              </div>
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            </div>
 
             {error && (
               <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-start gap-2.5">

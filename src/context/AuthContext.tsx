@@ -2,17 +2,17 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { 
   auth, 
   db, 
-  isFirebaseConfigured, 
   googleProvider, 
   signInWithPopup, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
-  firebaseSignOut,
+  firebaseSignOut, 
   onAuthStateChanged,
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
+  doc, 
+  setDoc, 
+  getDoc, 
+  updateDoc,
+  serverTimestamp 
 } from '../lib/firebase';
 
 export interface UserProfile {
@@ -24,7 +24,7 @@ export interface UserProfile {
   xp: number;
   streak: number;
   completedMissions?: string[];
-  createdAt?: string;
+  createdAt?: any;
 }
 
 interface AuthContextType {
@@ -40,223 +40,176 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'brainsetu_auth_user';
-const LOCAL_USERS_DB = 'brainsetu_users_db';
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Initialize Auth listener or LocalStorage session
+  // Synchronize state with Firebase Auth
   useEffect(() => {
-    if (isFirebaseConfigured && auth) {
-      const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-        if (firebaseUser) {
-          try {
-            // Fetch extra profile from Firestore
-            if (db) {
-              const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
-              if (userDoc.exists()) {
-                const data = userDoc.data();
-                setUser({
-                  uid: firebaseUser.uid,
-                  email: firebaseUser.email,
-                  displayName: data.displayName || firebaseUser.displayName || 'BrainSetu Explorer',
-                  role: data.role || 'student',
-                  grade: data.grade || 'Grade 3–4',
-                  xp: data.xp || 120,
-                  streak: data.streak || 1,
-                  completedMissions: data.completedMissions || []
-                });
-              } else {
-                // Initialize doc
-                const newProfile: UserProfile = {
-                  uid: firebaseUser.uid,
-                  email: firebaseUser.email,
-                  displayName: firebaseUser.displayName || 'BrainSetu Explorer',
-                  role: 'student',
-                  grade: 'Grade 3–4',
-                  xp: 120,
-                  streak: 1,
-                  completedMissions: []
-                };
-                await setDoc(doc(db, 'users', firebaseUser.uid), {
-                  ...newProfile,
-                  createdAt: serverTimestamp()
-                });
-                setUser(newProfile);
-              }
-            }
-          } catch (err) {
-            console.error('Error fetching Firestore user profile:', err);
-            // Fallback object
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        try {
+          const userDocRef = doc(db, 'users', firebaseUser.uid);
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const data = userDoc.data();
             setUser({
               uid: firebaseUser.uid,
               email: firebaseUser.email,
-              displayName: firebaseUser.displayName || 'BrainSetu Explorer',
-              role: 'student',
-              xp: 120,
-              streak: 1
+              displayName: data.displayName || firebaseUser.displayName || 'BrainSetu Explorer',
+              role: data.role || 'student',
+              grade: data.grade || 'Grade 3–4',
+              xp: data.xp || 150,
+              streak: data.streak || 1,
+              completedMissions: data.completedMissions || []
             });
+          } else {
+            // Document not yet in Firestore (e.g., initial Google Sign-In)
+            const newProfile: UserProfile = {
+              uid: firebaseUser.uid,
+              email: firebaseUser.email,
+              displayName: firebaseUser.displayName || 'BrainSetu Student',
+              role: 'student',
+              grade: 'Grade 3–4',
+              xp: 150,
+              streak: 1,
+              completedMissions: []
+            };
+            await setDoc(userDocRef, {
+              ...newProfile,
+              createdAt: serverTimestamp(),
+              lastLoginAt: serverTimestamp()
+            });
+            setUser(newProfile);
           }
-        } else {
-          setUser(null);
+        } catch (err) {
+          console.error('Error fetching Firestore user profile:', err);
+          setUser({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName || 'BrainSetu Student',
+            role: 'student',
+            xp: 150,
+            streak: 1
+          });
         }
-        setLoading(false);
-      });
-
-      return () => unsubscribe();
-    } else {
-      // Local Storage Fallback
-      try {
-        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (stored) {
-          setUser(JSON.parse(stored));
-        }
-      } catch (e) {
-        console.warn('Failed to parse local auth user:', e);
+      } else {
+        setUser(null);
       }
       setLoading(false);
-    }
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  // Email/Password Login
+  // Email/Password Login: Only allows existing accounts to log in!
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      if (isFirebaseConfigured && auth) {
-        await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email.trim(), password);
+    } catch (err: any) {
+      console.error('Firebase sign-in error:', err);
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+        throw new Error('No account found with this email, or invalid password. Please sign up first.');
+      } else if (err.code === 'auth/wrong-password') {
+        throw new Error('Incorrect password. Please verify your password and try again.');
+      } else if (err.code === 'auth/invalid-email') {
+        throw new Error('Please enter a valid email address.');
+      } else if (err.code === 'auth/operation-not-allowed') {
+        throw new Error('Email/Password sign-in is not enabled yet in your Firebase Authentication console.');
       } else {
-        // Local Storage Simulation
-        const usersDb: Record<string, { password: string; profile: UserProfile }> = 
-          JSON.parse(localStorage.getItem(LOCAL_USERS_DB) || '{}');
-        
-        const existing = usersDb[email.toLowerCase()];
-        if (existing) {
-          if (existing.password !== password) {
-            throw new Error('Incorrect password. Please try again.');
-          }
-          setUser(existing.profile);
-          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(existing.profile));
-        } else {
-          // Auto-create local user for hassle-free testing
-          const newProfile: UserProfile = {
-            uid: `user_${Date.now()}`,
-            email,
-            displayName: email.split('@')[0],
-            role: 'student',
-            grade: 'Grade 3–4',
-            xp: 150,
-            streak: 1,
-            completedMissions: ['Mission 01: Starlight Bakery'],
-            createdAt: new Date().toISOString()
-          };
-          usersDb[email.toLowerCase()] = { password, profile: newProfile };
-          localStorage.setItem(LOCAL_USERS_DB, JSON.stringify(usersDb));
-          setUser(newProfile);
-          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newProfile));
-        }
+        throw new Error(err.message || 'Login failed. Please try again.');
       }
     } finally {
       setLoading(false);
     }
   };
 
-  // Sign Up
+  // Sign Up: Creates account and saves in Firebase Auth + Firestore users collection
   const signup = async (
-    name: string, 
-    email: string, 
-    password: string, 
+    name: string,
+    email: string,
+    password: string,
     role: 'student' | 'parent' = 'student',
     grade: string = 'Grade 3–4'
   ) => {
     setLoading(true);
     try {
-      if (isFirebaseConfigured && auth && db) {
-        const cred = await createUserWithEmailAndPassword(auth, email, password);
-        const newProfile: UserProfile = {
-          uid: cred.user.uid,
-          email: cred.user.email,
-          displayName: name,
-          role,
-          grade,
-          xp: 100,
-          streak: 1,
-          completedMissions: []
-        };
-        await setDoc(doc(db, 'users', cred.user.uid), {
-          ...newProfile,
-          createdAt: serverTimestamp()
-        });
-        setUser(newProfile);
+      const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
+      const newProfile: UserProfile = {
+        uid: cred.user.uid,
+        email: cred.user.email,
+        displayName: name,
+        role,
+        grade,
+        xp: 100,
+        streak: 1,
+        completedMissions: []
+      };
+
+      // Save user to Firestore users collection
+      await setDoc(doc(db, 'users', cred.user.uid), {
+        ...newProfile,
+        createdAt: serverTimestamp(),
+        lastLoginAt: serverTimestamp()
+      });
+
+      setUser(newProfile);
+    } catch (err: any) {
+      console.error('Firebase sign-up error:', err);
+      if (err.code === 'auth/email-already-in-use') {
+        throw new Error('An account with this email already exists. Please log in instead.');
+      } else if (err.code === 'auth/weak-password') {
+        throw new Error('Password should be at least 6 characters.');
+      } else if (err.code === 'auth/operation-not-allowed') {
+        throw new Error('Email/Password sign-up is not enabled yet in your Firebase Authentication console.');
       } else {
-        // Local Storage Simulation
-        const usersDb: Record<string, { password: string; profile: UserProfile }> = 
-          JSON.parse(localStorage.getItem(LOCAL_USERS_DB) || '{}');
-
-        if (usersDb[email.toLowerCase()]) {
-          throw new Error('An account with this email already exists. Please log in.');
-        }
-
-        const newProfile: UserProfile = {
-          uid: `user_${Date.now()}`,
-          email,
-          displayName: name,
-          role,
-          grade,
-          xp: 100,
-          streak: 1,
-          completedMissions: [],
-          createdAt: new Date().toISOString()
-        };
-
-        usersDb[email.toLowerCase()] = { password, profile: newProfile };
-        localStorage.setItem(LOCAL_USERS_DB, JSON.stringify(usersDb));
-        setUser(newProfile);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newProfile));
+        throw new Error(err.message || 'Account creation failed. Please try again.');
       }
     } finally {
       setLoading(false);
     }
   };
 
-  // Google Sign-In
+  // Google Sign-In with Account Selection
   const loginWithGoogle = async () => {
     setLoading(true);
     try {
-      if (isFirebaseConfigured && auth) {
-        const cred = await signInWithPopup(auth, googleProvider);
-        if (db) {
-          const userDoc = await getDoc(doc(db, 'users', cred.user.uid));
-          if (!userDoc.exists()) {
-            await setDoc(doc(db, 'users', cred.user.uid), {
-              uid: cred.user.uid,
-              email: cred.user.email,
-              displayName: cred.user.displayName || 'Google Student',
-              role: 'student',
-              grade: 'Grade 3–4',
-              xp: 150,
-              streak: 1,
-              completedMissions: [],
-              createdAt: serverTimestamp()
-            });
-          }
-        }
-      } else {
-        // Google simulation in local storage fallback
-        const mockGoogleUser: UserProfile = {
-          uid: `google_${Date.now()}`,
-          email: 'student.demo@brainsetu.academy',
-          displayName: 'Demo Student (Google)',
+      const cred = await signInWithPopup(auth, googleProvider);
+      const userDocRef = doc(db, 'users', cred.user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (!userDoc.exists()) {
+        const newProfile: UserProfile = {
+          uid: cred.user.uid,
+          email: cred.user.email,
+          displayName: cred.user.displayName || 'BrainSetu Student',
           role: 'student',
           grade: 'Grade 3–4',
-          xp: 250,
-          streak: 3,
-          completedMissions: ['Mission 01', 'Mission 02'],
-          createdAt: new Date().toISOString()
+          xp: 150,
+          streak: 1,
+          completedMissions: []
         };
-        setUser(mockGoogleUser);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockGoogleUser));
+        await setDoc(userDocRef, {
+          ...newProfile,
+          createdAt: serverTimestamp(),
+          lastLoginAt: serverTimestamp()
+        });
+        setUser(newProfile);
+      } else {
+        await updateDoc(userDocRef, {
+          lastLoginAt: serverTimestamp()
+        });
+      }
+    } catch (err: any) {
+      console.error('Google sign-in error:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        throw new Error('Google sign-in popup was closed before completing.');
+      } else if (err.code === 'auth/operation-not-allowed') {
+        throw new Error('Google provider is not enabled in your Firebase Authentication Console.');
+      } else {
+        throw new Error(err.message || 'Google sign-in failed. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -265,49 +218,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Logout
   const logout = async () => {
-    if (isFirebaseConfigured && auth) {
+    try {
       await firebaseSignOut(auth);
+      setUser(null);
+      localStorage.removeItem('brainsetu_auth_user');
+    } catch (err) {
+      console.error('Logout error:', err);
     }
-    setUser(null);
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
   };
 
-  // Save Learning Lab Progress & XP
+  // Save Progress (XP, Missions) into Firestore
   const saveProgress = async (xpGained: number, missionId?: string) => {
     if (!user) return;
 
-    const updatedXP = (user.xp || 0) + xpGained;
-    const missions = user.completedMissions ? [...user.completedMissions] : [];
-    if (missionId && !missions.includes(missionId)) {
-      missions.push(missionId);
+    const newXp = (user.xp || 0) + xpGained;
+    const completed = [...(user.completedMissions || [])];
+    if (missionId && !completed.includes(missionId)) {
+      completed.push(missionId);
     }
 
-    const updatedUser: UserProfile = {
+    const updated: UserProfile = {
       ...user,
-      xp: updatedXP,
-      completedMissions: missions
+      xp: newXp,
+      completedMissions: completed
     };
 
-    setUser(updatedUser);
+    setUser(updated);
 
-    if (isFirebaseConfigured && db && auth?.currentUser) {
-      try {
-        await setDoc(doc(db, 'users', auth.currentUser.uid), {
-          xp: updatedXP,
-          completedMissions: missions,
-          lastActive: serverTimestamp()
-        }, { merge: true });
-      } catch (err) {
-        console.warn('Failed to update progress in Firestore:', err);
-      }
-    } else {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedUser));
-      // update db entry
-      const usersDb = JSON.parse(localStorage.getItem(LOCAL_USERS_DB) || '{}');
-      if (user.email && usersDb[user.email.toLowerCase()]) {
-        usersDb[user.email.toLowerCase()].profile = updatedUser;
-        localStorage.setItem(LOCAL_USERS_DB, JSON.stringify(usersDb));
-      }
+    try {
+      await updateDoc(doc(db, 'users', user.uid), {
+        xp: newXp,
+        completedMissions: completed,
+        lastActiveAt: serverTimestamp()
+      });
+    } catch (err) {
+      console.warn('Could not sync progress to Firestore:', err);
     }
   };
 
@@ -321,7 +266,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loginWithGoogle,
         logout,
         saveProgress,
-        isFirebaseActive: isFirebaseConfigured
+        isFirebaseActive: true
       }}
     >
       {children}
@@ -329,7 +274,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useAuth = (): AuthContextType => {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
