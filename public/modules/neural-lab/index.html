@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrainSetu Academy: Neural Memory Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="grade-theme-g3">
+  <!-- Accessibility Toolbar -->
+  <aside id="a11y-bar" aria-label="Accessibility Settings">
+    <button id="btn-toggle-sound" class="icon-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">🔊</button>
+    <button id="btn-toggle-contrast" class="icon-btn" aria-label="Toggle High Contrast" title="High Contrast">🌓</button>
+    <button id="btn-toggle-font" class="icon-btn" aria-label="Increase Text Size" title="Font Size">A+</button>
+  </aside>
+
+  <!-- Main Game Shell -->
+  <main id="game-app">
+    <!-- Top HUD / Stats Bar -->
+    <header id="game-hud" class="glass-card">
+      <div class="hud-left">
+        <div class="academy-logo">🧠 Brain<span>Setu</span></div>
+        <div class="badge-tag" id="hud-mastery-level">Explorer Lvl 1</div>
+        <div class="stat-pill" title="Memory Streak">🔥 <span id="stat-streak">0</span></div>
+        <div class="stat-pill" title="BrainSetu Sparks">⚡ <span id="stat-xp">0</span> XP</div>
+      </div>
+      <div class="hud-center">
+        <div class="memory-meter" title="Active Neural Bridge Strength">
+          <label for="brain-meter-fill">🌉 Neural Bridge: <strong id="brain-meter-val">60%</strong></label>
+          <div class="meter-bar" id="brain-meter-fill"><div class="meter-progress" style="width: 60%;"></div></div>
+        </div>
+      </div>
+      <div class="hud-right">
+        <button id="btn-home" class="btn-bubble small">🗺️ Campus Map</button>
+      </div>
+    </header>
+
+    <!-- BrainSetu Stage Viewport -->
+    <section id="viewport-stage" class="viewport-stage" aria-live="polite">
+      
+      <!-- Screen 1: Welcome & Mission Selector -->
+      <section id="screen-welcome" class="game-screen active">
+        <div class="welcome-box glass-card animated-pop">
+          <h1 class="logo-title">Welcome to Brain<span class="brand-accent">Setu</span> Academy</h1>
+          <p class="subtitle">Bridging Sensory Exploration with Lifelong Memory 🚀</p>
+
+          <!-- The BrainSetu 4-Step Scaffolding Banner -->
+          <div class="setu-steps-flow">
+            <div class="step-badge"><span class="step-num">1</span> 👁️ Explore Simulation</div>
+            <div class="step-arrow">➔</div>
+            <div class="step-badge"><span class="step-num">2</span> 🔗 Form Neural Bridge</div>
+            <div class="step-arrow">➔</div>
+            <div class="step-badge"><span class="step-num">3</span> ⚡ Cross & Recall</div>
+            <div class="step-arrow">➔</div>
+            <div class="step-badge"><span class="step-num">4</span> 🏆 Neural Mastery</div>
+          </div>
+
+          <div class="filter-controls">
+            <label for="select-grade">Grade:
+              <select id="select-grade" aria-label="Select Grade Level">
+                <option value="all">All Grades (1–5)</option>
+                <option value="1">Grade 1–2 (Foundation Sprouts)</option>
+                <option value="3" selected>Grade 3–4 (Bridge Explorers)</option>
+                <option value="5">Grade 5 (Mastery Champions)</option>
+              </select>
+            </label>
+            <label for="select-subject">Subject Lab:
+              <select id="select-subject" aria-label="Select Subject">
+                <option value="all">All Labs</option>
+                <option value="Math">Maths Simulator</option>
+                <option value="Science">Science & Cosmos Lab</option>
+                <option value="Vocabulary">Language & Roots Garden</option>
+              </select>
+            </label>
+            <div class="exercise-count-badge">📚 <span id="total-exercises-counter">100</span> Active Modules</div>
+          </div>
+
+          <div class="mission-grid" id="mission-selection-grid">
+            <!-- Populated dynamically with 100 missions -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 2: Interactive Simulation & Neural Bridge Builder -->
+      <section id="screen-simulation" class="game-screen">
+        <div class="sim-header glass-card">
+          <div class="sim-title-group">
+            <span class="badge-tag" id="sim-grade-tag">Grade 3</span>
+            <h2 class="objective-text" id="sim-objective-text">The Starlight Bakery (7 × 8)</h2>
+          </div>
+          <button id="btn-start-challenge" class="btn-bubble primary pulse-glow">Ready to Cross the Bridge! ⚡</button>
+        </div>
+
+        <!-- Simulation Stage with Scientific Canvas Background and Interactive DOM Elements -->
+        <div id="simulation-world" class="sim-world-container">
+          <canvas id="sim-canvas"></canvas>
+          <div id="sim-interactive-layer" class="sim-interactive-layer">
+            <!-- Clickable Interactive Clue Nodes -->
+          </div>
+        </div>
+
+        <!-- Deep Conceptual Understanding Clue Panel -->
+        <div class="story-clue-bar glass-card" id="story-clue-bar">
+          <span class="sparky-inline-avatar">🤖</span>
+          <div class="clue-content-box">
+            <strong id="story-clue-title">Step 1: Explore & Connect</strong>
+            <p id="story-clue-text">Tap the glowing objects in the simulation above to reveal how they connect together!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 3: The Recall Crossing (Active Challenge) -->
+      <section id="screen-challenge" class="game-screen">
+        <div class="challenge-container glass-card">
+          <div class="timer-ribbon">
+            <span class="timer-icon">⏱️</span>
+            <div class="timer-gauge"><div id="challenge-timer-bar"></div></div>
+          </div>
+
+          <div class="bridge-crossing-header">
+            <span class="badge-tag">Bridge Crossing</span>
+            <h2 id="challenge-question-title">Recall Challenge</h2>
+            <p id="challenge-instructions" class="challenge-subtext">The simulation has faded. Use your mental picture to recall the answer!</p>
+          </div>
+          
+          <div id="challenge-interactive-area" class="challenge-flex-zone">
+            <!-- Dynamic Exercise Area (Sequence, Match, or Multiple Choice) -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 4: Neural Growth Results -->
+      <section id="screen-results" class="game-screen">
+        <div class="results-card glass-card animated-bounce">
+          <div class="result-badge-showcase" id="result-badge-icon">🌉</div>
+          <h2 id="result-headline">Neural Bridge Formed!</h2>
+          <p id="result-submessage">SetuMitra has stored this concept in your long-term memory bank.</p>
+
+          <div class="results-stats-matrix">
+            <div class="res-stat-item">
+              <span class="res-stat-label">Accuracy</span>
+              <span class="res-stat-value" id="res-accuracy">100%</span>
+            </div>
+            <div class="res-stat-item">
+              <span class="res-stat-label">Recall Speed</span>
+              <span class="res-stat-value" id="res-speed">1.5s</span>
+            </div>
+            <div class="res-stat-item">
+              <span class="res-stat-label">BrainSparks Earned</span>
+              <span class="res-stat-value" id="res-xp">+50 ⚡</span>
+            </div>
+            <div class="res-stat-item">
+              <span class="res-stat-label">Bridge Strength</span>
+              <span class="res-stat-value" id="res-growth">+12% 🧠</span>
+            </div>
+          </div>
+
+          <div class="action-btn-row">
+            <button id="btn-replay-mission" class="btn-bubble secondary">Reinforce Again 🔄</button>
+            <button id="btn-next-mission" class="btn-bubble primary">Explore Next Bridge 🚀</button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- BrainSetu Mascot Companion: SetuMitra -->
+    <aside id="mascot-companion" class="mascot-dock">
+      <div id="mascot-speech-bubble" class="speech-bubble">
+        <p id="mascot-dialogue">Namaste! I am SetuMitra, your learning companion at BrainSetu Academy. Let's turn what you see into what you never forget!</p>
+        <button id="btn-speech-audio" class="tiny-sound-btn" aria-label="Listen to SetuMitra">🔊</button>
+      </div>
+      <div id="mascot-avatar" class="mascot-character idle" role="img" aria-label="SetuMitra Companion">
+        <div class="mascot-bridge-arch"></div>
+        <div class="mascot-face">
+          <div class="mascot-eye left-eye"></div>
+          <div class="mascot-eye right-eye"></div>
+          <div class="mascot-smile"></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
