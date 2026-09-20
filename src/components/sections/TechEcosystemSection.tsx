@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { ScrollReveal } from '../common/ScrollReveal';
 
 export const TechEcosystemSection: React.FC = () => {
   const { t } = useLanguage();
@@ -33,28 +34,32 @@ export const TechEcosystemSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            {t('tech.title')}
-          </h2>
-          <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            {t('tech.subtitle')}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
+              {t('tech.title')}
+            </h2>
+            <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
+              {t('tech.subtitle')}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 2-Column: Realistic Photo + Clean 3 Pillars & Feature List */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Realistic Educational Technology Photography */}
           <div className="lg:col-span-6">
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 group">
-              <img
-                src="/images/real-tech-student.jpg"
-                alt="BrainSetu student exploring mathematics concepts with illuminated neural cognitive model"
-                className="w-full h-auto object-cover object-center max-h-[480px] transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
+            <ScrollReveal delay={100}>
+              <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 group">
+                <img
+                  src="/images/real-tech-student.jpg"
+                  alt="BrainSetu student exploring mathematics concepts with illuminated neural cognitive model"
+                  className="w-full h-auto object-cover object-center max-h-[480px] transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Pillars & Features */}
@@ -63,14 +68,16 @@ export const TechEcosystemSection: React.FC = () => {
             {/* 3 Modalities */}
             <div className="space-y-4">
               {pillars.map((item, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-brand-slate-bg border border-slate-200/70">
-                  <h3 className="text-base font-display font-bold text-brand-primary-deep">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-brand-slate-muted mt-1 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
+                <ScrollReveal key={idx} delay={idx * 100}>
+                  <div className="p-4 rounded-2xl bg-brand-slate-bg border border-slate-200/70 hover:bg-white hover:border-slate-300 hover:shadow-card hover:-translate-y-0.5 transition-all duration-300">
+                    <h3 className="text-base font-display font-bold text-brand-primary-deep">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-brand-slate-muted mt-1 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </ScrollReveal>
               ))}
             </div>
 

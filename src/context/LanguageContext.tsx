@@ -36,6 +36,17 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.statRetention': '10X Memory Retention',
     'hero.statConfidence': '98% Math Confidence',
 
+    // Impact Section
+    'impact.badge': 'Our Measurable Impact',
+    'impact.title': 'Proven Track Record of Excellence',
+    'impact.subtitle': 'Empowering learners, educators, and schools across the nation with research-backed cognitive and conceptual learning methodologies.',
+    'impact.stat1Label': 'Successful Registrations',
+    'impact.stat2Label': 'Active Members',
+    'impact.stat3Label': 'Years of Experience',
+    'impact.stat4Label': 'Live Webinars',
+    'impact.stat5Label': 'Seminars & Workshops',
+    'impact.stat6Label': 'Schools We Work With',
+
     // Why BrainSetu Section
     'why.title': 'More Than Just Learning',
     'why.subtitle': 'BrainSetu combines mathematics, cognitive development, memory techniques, mentoring, and technology to create a more meaningful learning experience.',
@@ -182,6 +193,17 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.statRetention': '10X स्मरण शक्ति',
     'hero.statConfidence': '98% गणित में आत्मविश्वास',
 
+    // Impact Section
+    'impact.badge': 'हमारा प्रभाव',
+    'impact.title': 'उत्कृष्टता का प्रमाणित रिकॉर्ड',
+    'impact.subtitle': 'अनुसंधान-आधारित संज्ञानात्मक और संकल्पनात्मक शिक्षण पद्धतियों के साथ देश भर के छात्रों, शिक्षकों और स्कूलों को सशक्त बनाना।',
+    'impact.stat1Label': 'सफल पंजीकरण',
+    'impact.stat2Label': 'सक्रिय सदस्य',
+    'impact.stat3Label': 'वर्षों का अनुभव',
+    'impact.stat4Label': 'लाइव वेबिनार',
+    'impact.stat5Label': 'सेमिनार और कार्यशालाएं',
+    'impact.stat6Label': 'संबद्ध विद्यालय',
+
     // Why BrainSetu Section
     'why.title': 'सिर्फ पढ़ाई से कहीं अधिक',
     'why.subtitle': 'ब्रेनसेतु गणित, संज्ञानात्मक विकास, मेमोरी तकनीक, मेंटरशिप और तकनीक को जोड़कर एक गहरा और सार्थक शिक्षण अनुभव प्रदान करता है।',
@@ -327,6 +349,17 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.statStudents': '१०,०००+ विद्यार्थ्यांना मार्गदर्शन',
     'hero.statRetention': '१० पट स्मरणशक्ती',
     'hero.statConfidence': '९८% गणितातील आत्मविश्वास',
+
+    // Impact Section
+    'impact.badge': 'आमचा प्रभाव',
+    'impact.title': 'उत्कृष्टतेचा सिद्ध ट्रॅक रेकॉर्ड',
+    'impact.subtitle': 'संशोधनावर आधारित संज्ञानात्मक आणि संकल्पनात्मक शिक्षण पद्धतींद्वारे देशभरातील विद्यार्थी, शिक्षक आणि शाळांना सक्षम करणे.',
+    'impact.stat1Label': 'यशस्वी नोंदणी',
+    'impact.stat2Label': 'सक्रिय सदस्य',
+    'impact.stat3Label': 'वर्षांचा अनुभव',
+    'impact.stat4Label': 'थेट वेबिनार',
+    'impact.stat5Label': 'चर्चासत्रे आणि कार्यशाळा',
+    'impact.stat6Label': 'सहभागी शाळा',
 
     // Why BrainSetu Section
     'why.title': 'केवळ शिक्षणापेक्षा बरेच काही',

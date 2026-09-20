@@ -1,6 +1,7 @@
 import React from 'react';
 import { SEO } from '../components/common/SEO';
 import { HeroSection } from '../components/sections/HeroSection';
+import { ImpactSection } from '../components/sections/ImpactSection';
 import { WhyBrainSetuSection } from '../components/sections/WhyBrainSetuSection';
 import { LearningJourneySection } from '../components/sections/LearningJourneySection';
 import { ProgramsSection } from '../components/sections/ProgramsSection';
@@ -19,6 +20,9 @@ export const Home: React.FC = () => {
       <main>
         {/* Section 2: Hero */}
         <HeroSection />
+
+        {/* Section 2.5: Our Impact Statistics */}
+        <ImpactSection />
 
         {/* Section 3: Why BrainSetu */}
         <WhyBrainSetuSection />

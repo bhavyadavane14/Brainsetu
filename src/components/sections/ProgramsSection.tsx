@@ -5,6 +5,7 @@ import { programsData } from '../../data/programs';
 import { Button } from '../common/Button';
 import { EnquiryModal } from '../common/EnquiryModal';
 import { useLanguage } from '../../context/LanguageContext';
+import { ScrollReveal } from '../common/ScrollReveal';
 
 export const ProgramsSection: React.FC = () => {
   const { t } = useLanguage();
@@ -24,24 +25,27 @@ export const ProgramsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-            {t('programs.sectionBadge')}
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            {t('programs.sectionTitle')}
-          </h2>
-          <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            {t('programs.sectionSubtitle')}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
+              {t('programs.sectionBadge')}
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
+              {t('programs.sectionTitle')}
+            </h2>
+            <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
+              {t('programs.sectionSubtitle')}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 2 Core Programs Side-by-Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
           
           {/* Card 1: 10X Memory Power Webinar (Exact Card Design Matching Provided Image) */}
           {webinarProg && (
-            <div className="rounded-3xl bg-white border border-slate-200 shadow-card hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between p-7 sm:p-9 relative">
+            <ScrollReveal delay={100} className="h-full">
+              <div className="h-full rounded-3xl bg-white border border-slate-200 shadow-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between p-7 sm:p-9 relative">
               {/* Subtle grid pattern background */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
@@ -110,11 +114,13 @@ export const ProgramsSection: React.FC = () => {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
           )}
 
           {/* Card 2: Intellia 360 Mathematics Program (Flagship Curriculum Card) */}
           {mathProg && (
-            <div className="rounded-3xl bg-gradient-to-b from-white to-sky-50/40 border-2 border-cyan-400/40 shadow-card hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between p-7 sm:p-9 relative">
+            <ScrollReveal delay={200} className="h-full">
+              <div className="h-full rounded-3xl bg-gradient-to-b from-white to-sky-50/40 border-2 border-cyan-400/40 shadow-card hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between p-7 sm:p-9 relative">
               <div>
                 {/* Pricing & Badge Header */}
                 <div className="flex items-center justify-between mb-5">
@@ -185,6 +191,7 @@ export const ProgramsSection: React.FC = () => {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
           )}
 
         </div>
