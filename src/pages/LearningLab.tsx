@@ -11,12 +11,18 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { BrainSetuLogo } from '../assets/logo/BrainSetuLogo';
 import { SEO } from '../components/common/SEO';
+import { WelcomeModal } from '../components/common/WelcomeModal';
 
 export const LearningLab: React.FC = () => {
   const { user, logout } = useAuth();
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [welcomeModalOpen, setWelcomeModalOpen] = useState(true);
   const [iframeKey, setIframeKey] = useState(1);
   const navigate = useNavigate();
+
+  const isNewUser = Boolean(
+    user?.isNew || 
+    (user?.uid && sessionStorage.getItem('brainsetu_is_new_' + user.uid) === 'true')
+  );
 
   const handleLogout = async () => {
     await logout();
@@ -108,34 +114,13 @@ export const LearningLab: React.FC = () => {
           </div>
         </header>
 
-        {/* Personalized Welcome Banner */}
-        {showWelcome && (
-          <div className="bg-gradient-to-r from-brand-primary-deep/90 via-brand-navy-900 to-cyan-950 border-b border-cyan-500/30 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs sm:text-sm animate-fadeIn shadow-inner">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-base flex-shrink-0">
-                ✨
-              </div>
-              <div>
-                <p className="font-bold text-white flex items-center gap-2">
-                  <span>Welcome back, {user?.displayName || 'Student'}!</span>
-                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-medium">
-                    Neural Bridge Active
-                  </span>
-                </p>
-                <p className="text-slate-300 text-xs mt-0.5">
-                  Your Learning Lab workspace is ready. Dive into today's memory scaffolding and interactive simulations!
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowWelcome(false)}
-              className="text-slate-400 hover:text-white px-2.5 py-1 rounded-lg hover:bg-slate-800 transition-colors text-xs font-semibold flex items-center gap-1"
-              title="Close welcome message"
-            >
-              ✕ <span className="hidden sm:inline">Dismiss</span>
-            </button>
-          </div>
-        )}
+        {/* Pop-up Welcome Modal (New vs Returning User) */}
+        <WelcomeModal
+          isOpen={welcomeModalOpen}
+          onClose={() => setWelcomeModalOpen(false)}
+          user={user}
+          isNewUser={isNewUser}
+        />
 
         {/* Embedded Interactive Module Container */}
         <main className="flex-1 flex flex-col bg-slate-950 relative overflow-hidden">

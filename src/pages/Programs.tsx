@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Sparkles, 
   ArrowRight,
   Check,
   BookOpen
@@ -9,11 +8,12 @@ import {
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { programsData } from '../data/programs';
-import { Button } from '../components/common/Button';
 import { EnquiryModal } from '../components/common/EnquiryModal';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Programs: React.FC = () => {
+  const { t } = useLanguage();
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [selectedProg, setSelectedProg] = useState('');
 
@@ -68,23 +68,26 @@ export const Programs: React.FC = () => {
                     <div className="flex items-center justify-between mb-6">
                       <div className="space-y-0.5">
                         <span className="block text-xs font-bold text-slate-400 line-through">
-                          Original: {webinar.originalPrice}
+                          {t('programs.original')} {webinar.originalPrice}
                         </span>
-                        <span className="text-sm font-bold text-slate-500 line-through">
-                          Webinar Fee: {webinar.discountedPrice}
-                        </span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-xl sm:text-2xl font-display font-black text-brand-primary-deep">
+                            {webinar.discountedPrice}
+                          </span>
+                          <span className="text-xs font-semibold text-slate-500">{t('programs.webinarPerPass')}</span>
+                        </div>
                       </div>
 
-                      <span className="px-4 py-1.5 rounded-2xl bg-[#FEF08A] text-[#854D0E] font-black text-sm tracking-wider uppercase shadow-xs">
-                        FREE PASS
+                      <span className="px-3.5 py-1.5 rounded-2xl bg-amber-100 text-amber-900 border border-amber-300 font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-xs">
+                        {t('programs.webinarBadge')}
                       </span>
                     </div>
 
                     <h2 className="text-2xl sm:text-3xl font-display font-black text-brand-primary-deep tracking-tight mb-3">
-                      {webinar.title}
+                      {t('programs.webinarTitle')}
                     </h2>
                     <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                      {webinar.overview}
+                      {t('programs.webinarShortDesc')}
                     </p>
 
                     {/* Highlights */}
@@ -111,8 +114,8 @@ export const Programs: React.FC = () => {
                       onClick={() => handleOpenEnquiry(webinar.title)}
                       className="w-full py-4 px-6 rounded-2xl bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                     >
-                      <Sparkles className="w-4 h-4 text-slate-900" />
-                      <span>Get Free Now</span>
+                      <BookOpen className="w-4 h-4 text-slate-900" />
+                      <span>{t('programs.enquireBtn')}</span>
                     </button>
 
                     <div className="text-center">
@@ -168,15 +171,14 @@ export const Programs: React.FC = () => {
                   </div>
 
                   <div className="pt-8 space-y-3">
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      className="w-full justify-center text-base font-bold shadow-md hover:shadow-lg py-4"
+                    <button
+                      type="button"
                       onClick={() => handleOpenEnquiry(mathProgram.title)}
+                      className="w-full py-4 px-6 rounded-2xl bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                     >
-                      <BookOpen className="w-4 h-4 mr-1.5" />
-                      <span>Enquire & Book Diagnostic</span>
-                    </Button>
+                      <BookOpen className="w-4 h-4 text-slate-900" />
+                      <span>{t('programs.enquireBtn')}</span>
+                    </button>
 
                     <div className="text-center">
                       <Link

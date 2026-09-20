@@ -20,6 +20,8 @@ import { siteConfig } from '../../data/siteConfig';
 import { Button } from '../common/Button';
 import { EnquiryModal } from '../common/EnquiryModal';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
+import { LanguageSelector } from '../common/LanguageSelector';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,6 +29,7 @@ export const Navbar: React.FC = () => {
   const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,9 +56,9 @@ export const Navbar: React.FC = () => {
 
   // Primary visible desktop links
   const primaryLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Programs', path: '/programs' },
-    { name: 'Contact', path: '/contact' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.programs'), path: '/programs' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   // Drawer menu links
@@ -108,7 +111,7 @@ export const Navbar: React.FC = () => {
               ))}
             </nav>
 
-            {/* Actions: Auth + Enquire Now + ☰ Menu button */}
+            {/* Actions: Auth + Enquire Now + Language Dropdown + ☰ Menu button */}
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Dynamic Auth CTA */}
               {user ? (
@@ -118,14 +121,14 @@ export const Navbar: React.FC = () => {
                   title="Open Neural Memory Lab"
                 >
                   <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-                  <span>Learning Lab</span>
+                  <span>{t('nav.learningLab')}</span>
                 </Link>
               ) : (
                 <Link
                   to="/login"
                   className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold text-brand-navy-700 hover:text-brand-primary hover:bg-slate-100 transition-colors"
                 >
-                  <span>Sign In</span>
+                  <span>{t('nav.signIn')}</span>
                 </Link>
               )}
 
@@ -136,8 +139,11 @@ export const Navbar: React.FC = () => {
                 onClick={() => setEnquiryModalOpen(true)}
                 className="text-xs sm:text-sm px-3 sm:px-4 py-2"
               >
-                Enquire Now
+                {t('nav.enquireNow')}
               </Button>
+
+              {/* Language Selection Dropdown (Hindi, English, Marathi) */}
+              <LanguageSelector />
 
               {/* Hamburger Menu Trigger */}
               <button
@@ -148,7 +154,7 @@ export const Navbar: React.FC = () => {
                 aria-expanded={menuOpen}
               >
                 <Menu className="w-4 h-4 text-brand-primary-deep" />
-                <span className="hidden sm:inline">Menu</span>
+                <span className="hidden sm:inline">{t('nav.menu')}</span>
               </button>
             </div>
           </div>
@@ -280,26 +286,6 @@ export const Navbar: React.FC = () => {
                 >
                   <span>Programs & Masterclasses</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-                </NavLink>
-
-                {/* Neural Memory Lab Link */}
-                <NavLink
-                  to="/learning-lab"
-                  className={({ isActive }) =>
-                    `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-colors ${
-                      isActive
-                        ? 'bg-cyan-50 text-brand-primary font-bold'
-                        : 'text-brand-navy-800 hover:bg-slate-50'
-                    }`
-                  }
-                >
-                  <div className="flex items-center gap-2">
-                    <Brain className="w-4 h-4 text-cyan-600" />
-                    <span>Neural Memory Lab</span>
-                  </div>
-                  <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800">
-                    Module 3
-                  </span>
                 </NavLink>
 
                 <div className="pt-3 pb-1">

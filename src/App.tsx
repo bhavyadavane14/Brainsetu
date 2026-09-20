@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -75,10 +76,12 @@ const AppLayout: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <Router>
-      <AuthProvider>
-        <ScrollToTop />
-        <AppLayout />
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <ScrollToTop />
+          <AppLayout />
+        </AuthProvider>
+      </LanguageProvider>
     </Router>
   );
 };

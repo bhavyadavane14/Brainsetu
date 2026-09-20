@@ -12,8 +12,10 @@ import { InstagramIcon, LinkedinIcon, YoutubeIcon } from '../common/SocialIcons'
 import { BrainSetuLogo } from '../../assets/logo/BrainSetuLogo';
 import { siteConfig } from '../../data/siteConfig';
 import { programsData } from '../../data/programs';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const Footer: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <footer className="bg-brand-navy-900 text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,17 +76,17 @@ export const Footer: React.FC = () => {
           {/* Quick Links Column (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <h3 className="text-xs font-bold text-cyan-400 uppercase tracking-widest">
-              Quick Links
+              {t('footer.quickLinks')}
             </h3>
             <ul className="space-y-2 text-sm text-slate-300">
               <li>
-                <Link to="/" className="hover:text-cyan-300 transition-colors">Home</Link>
+                <Link to="/" className="hover:text-cyan-300 transition-colors">{t('nav.home')}</Link>
               </li>
               <li>
                 <Link to="/about" className="hover:text-cyan-300 transition-colors">About Us</Link>
               </li>
               <li>
-                <Link to="/programs" className="hover:text-cyan-300 transition-colors">All Programs</Link>
+                <Link to="/programs" className="hover:text-cyan-300 transition-colors">{t('nav.programs')}</Link>
               </li>
               <li>
                 <Link to="/learning-approach" className="hover:text-cyan-300 transition-colors">Learning Approach</Link>
@@ -93,22 +95,16 @@ export const Footer: React.FC = () => {
                 <Link to="/technology" className="hover:text-cyan-300 transition-colors">Technology & AI</Link>
               </li>
               <li>
-                <Link to="/student-development" className="hover:text-cyan-300 transition-colors">Student Development</Link>
+                <Link to="/student-development" className="hover:text-cyan-300 transition-colors">{t('footer.studentDev')}</Link>
               </li>
               <li>
-                <Link to="/parents" className="hover:text-cyan-300 transition-colors">For Parents</Link>
+                <Link to="/parents" className="hover:text-cyan-300 transition-colors">{t('footer.forParents')}</Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-cyan-300 transition-colors">Contact / Enquire</Link>
+                <Link to="/contact" className="hover:text-cyan-300 transition-colors">{t('footer.contactEnquire')}</Link>
               </li>
               <li>
-                <Link to="/learning-lab" className="text-cyan-400 font-semibold hover:text-cyan-300 transition-colors flex items-center gap-1">
-                  <span>Neural Memory Lab</span>
-                  <span className="text-[10px] bg-cyan-950 text-cyan-300 px-1 py-0.2 rounded border border-cyan-800">Module 3</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="hover:text-cyan-300 transition-colors">Student & Parent Portal</Link>
+                <Link to="/login" className="hover:text-cyan-300 transition-colors">{t('footer.portal')}</Link>
               </li>
             </ul>
           </div>
@@ -116,7 +112,7 @@ export const Footer: React.FC = () => {
           {/* Programs Column (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="text-xs font-bold text-cyan-400 uppercase tracking-widest">
-              Our Programs
+              {t('footer.programs')}
             </h3>
             <ul className="space-y-2 text-sm text-slate-300">
               {programsData.map((prog) => (

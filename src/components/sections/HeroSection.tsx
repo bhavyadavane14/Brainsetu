@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../common/Button';
 import { EnquiryModal } from '../common/EnquiryModal';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const HeroSection: React.FC = () => {
+  const { t } = useLanguage();
   const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   return (
@@ -14,16 +16,12 @@ export const HeroSection: React.FC = () => {
           {/* Left Text Column */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-brand-primary-deep tracking-tight leading-[1.15]">
-              Building Smarter Minds.{' '}
-              <span className="text-brand-secondary">Creating Confident Learners.</span>
+              {t('hero.titleLine1')}{' '}
+              <span className="text-brand-secondary">{t('hero.titleLine2')}</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-brand-navy-700/85 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Learn faster, remember better, think smarter, and perform with confidence.
-            </p>
-
-            <p className="text-sm sm:text-base text-brand-slate-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
-              BrainSetu represents the bridge between <strong>Knowledge → Understanding → Application → Confidence</strong>. We empower students through first-principles mathematics, cognitive memory techniques, and independent thinking.
+              {t('hero.subtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
@@ -34,7 +32,7 @@ export const HeroSection: React.FC = () => {
                 icon={<ArrowRight className="w-4 h-4" />}
                 className="w-full sm:w-auto"
               >
-                Explore Programs
+                {t('hero.exploreBtn')}
               </Button>
               <Button
                 variant="accent"
@@ -42,7 +40,7 @@ export const HeroSection: React.FC = () => {
                 onClick={() => setEnquiryOpen(true)}
                 className="w-full sm:w-auto"
               >
-                Enquire Now
+                {t('hero.enquireBtn')}
               </Button>
             </div>
           </div>

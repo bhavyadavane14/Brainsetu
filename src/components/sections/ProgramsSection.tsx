@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Sparkles, BookOpen } from 'lucide-react';
+import { ArrowRight, Check, BookOpen } from 'lucide-react';
 import { programsData } from '../../data/programs';
 import { Button } from '../common/Button';
 import { EnquiryModal } from '../common/EnquiryModal';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const ProgramsSection: React.FC = () => {
+  const { t } = useLanguage();
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState('');
 
@@ -24,13 +26,13 @@ export const ProgramsSection: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-            Targeted Educational Programs
+            {t('programs.sectionBadge')}
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            Programs Designed for Smarter Learning
+            {t('programs.sectionTitle')}
           </h2>
           <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            Choose from our specialized memory masterclass and our premier conceptual mathematics curriculum.
+            {t('programs.sectionSubtitle')}
           </p>
         </div>
 
@@ -44,28 +46,31 @@ export const ProgramsSection: React.FC = () => {
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
               <div>
-                {/* Pricing & Free Badge */}
+                {/* Pricing & Special Offer Badge */}
                 <div className="flex items-center justify-between mb-5">
                   <div className="space-y-0.5">
                     <span className="block text-xs font-bold text-slate-400 line-through">
-                      {webinarProg.originalPrice || '₹9,999'}
+                      {webinarProg.originalPrice || '₹4,999'}
                     </span>
-                    <span className="text-sm font-bold text-slate-500 line-through">
-                      {webinarProg.discountedPrice || '₹2,999'}
-                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-xl sm:text-2xl font-display font-black text-brand-primary-deep">
+                        {webinarProg.discountedPrice || '₹999'}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-500">{t('programs.webinarPerPass')}</span>
+                    </div>
                   </div>
 
-                  <span className="px-4 py-1.5 rounded-2xl bg-[#FEF08A] text-[#854D0E] font-black text-xs sm:text-sm tracking-wider uppercase shadow-xs">
-                    FREE
+                  <span className="px-3.5 py-1.5 rounded-2xl bg-amber-100 text-amber-900 border border-amber-300 font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-xs">
+                    {t('programs.webinarBadge')}
                   </span>
                 </div>
 
                 {/* Title & Tagline */}
                 <h3 className="text-2xl sm:text-3xl font-display font-black text-brand-primary-deep tracking-tight mb-3">
-                  {webinarProg.title}
+                  {t('programs.webinarTitle')}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  {webinarProg.shortDescription}
+                  {t('programs.webinarShortDesc')}
                 </p>
 
                 {/* Bullet Highlights with Blue Checks */}
@@ -83,15 +88,15 @@ export const ProgramsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: Matches Card 2 Exactly */}
               <div className="pt-8 space-y-3">
                 <button
                   type="button"
                   onClick={() => handleEnquire(webinarProg.title)}
                   className="w-full py-3.5 px-6 rounded-2xl bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4 text-slate-900" />
-                  <span>Get Free Now</span>
+                  <BookOpen className="w-4 h-4 text-slate-900" />
+                  <span>{t('programs.enquireBtn')}</span>
                 </button>
 
                 <div className="text-center">
@@ -99,7 +104,7 @@ export const ProgramsSection: React.FC = () => {
                     to={`/programs/${webinarProg.slug}`}
                     className="text-xs font-semibold text-brand-secondary hover:underline inline-flex items-center gap-1"
                   >
-                    <span>View Webinar Syllabus & Details</span>
+                    <span>{t('programs.webinarLink')}</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
@@ -166,7 +171,7 @@ export const ProgramsSection: React.FC = () => {
                   className="w-full py-3.5 px-6 rounded-2xl bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                 >
                   <BookOpen className="w-4 h-4 text-slate-900" />
-                  <span>Enquire & Book Diagnostic</span>
+                  <span>{t('programs.enquireBtn')}</span>
                 </button>
 
                 <div className="text-center">

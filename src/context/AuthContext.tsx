@@ -25,6 +25,7 @@ export interface UserProfile {
   streak: number;
   completedMissions?: string[];
   createdAt?: any;
+  isNew?: boolean;
 }
 
 interface AuthContextType {
@@ -145,8 +146,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         grade,
         xp: 100,
         streak: 1,
-        completedMissions: []
+        completedMissions: [],
+        isNew: true
       };
+      sessionStorage.setItem('brainsetu_is_new_' + cred.user.uid, 'true');
 
       // Save user to Firestore users collection
       await setDoc(doc(db, 'users', cred.user.uid), {
@@ -189,8 +192,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           grade: 'Grade 3–4',
           xp: 150,
           streak: 1,
-          completedMissions: []
+          completedMissions: [],
+          isNew: true
         };
+        sessionStorage.setItem('brainsetu_is_new_' + cred.user.uid, 'true');
         await setDoc(userDocRef, {
           ...newProfile,
           createdAt: serverTimestamp(),
