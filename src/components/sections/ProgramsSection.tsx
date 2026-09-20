@@ -197,7 +197,7 @@ export const ProgramsSection: React.FC = () => {
             size="md"
             icon={<ArrowRight className="w-4 h-4" />}
           >
-            Compare Both Programs
+            {t('common.compareBtn')}
           </Button>
         </div>
 

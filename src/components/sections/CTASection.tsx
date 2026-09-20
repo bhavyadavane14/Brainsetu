@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../common/Button';
 import { EnquiryModal } from '../common/EnquiryModal';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const CTASection: React.FC = () => {
+  const { t } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -15,11 +17,11 @@ export const CTASection: React.FC = () => {
           {/* Text & Action */}
           <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight leading-[1.2]">
-              A Brighter Learning Journey Starts Here
+              {t('cta.title')}
             </h2>
 
             <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Discover how your child approaches learning and identify foundational prerequisite gaps with a complimentary diagnostic consultation.
+              {t('cta.subtitle')}
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -30,12 +32,12 @@ export const CTASection: React.FC = () => {
                 icon={<ArrowRight className="w-4 h-4" />}
                 className="w-full sm:w-auto"
               >
-                Enquire Now
+                {t('cta.btn')}
               </Button>
 
               <div className="text-xs text-slate-500 text-center sm:text-left">
                 <span className="block font-semibold text-brand-navy-900">
-                  Or Call Direct:
+                  {t('cta.orCall')}
                 </span>
                 <span className="space-x-2">
                   <a href="tel:+918805333303" className="text-brand-primary font-medium hover:underline">
@@ -50,7 +52,7 @@ export const CTASection: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-400">
-              📍 Panvel Center: Feliz Flow Studio, Next to Hiranandani Trust School
+              {t('cta.address')}
             </p>
           </div>
 

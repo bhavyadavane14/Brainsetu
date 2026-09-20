@@ -1,27 +1,30 @@
 import React from 'react';
 import { Lightbulb, Brain, Binary, Cpu } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const WhyBrainSetuSection: React.FC = () => {
+  const { t } = useLanguage();
+
   const benefits = [
     {
       icon: Lightbulb,
-      title: 'Conceptual Learning',
-      description: 'Understand the "why" behind mathematical relationships rather than passively memorizing rules.',
+      title: t('why.benefit1Title'),
+      description: t('why.benefit1Desc'),
     },
     {
       icon: Binary,
-      title: 'Logical Thinking',
-      description: 'Develop structured deduction, pattern recognition, and analytical clarity that transfer to any domain.',
+      title: t('why.benefit2Title'),
+      description: t('why.benefit2Desc'),
     },
     {
       icon: Brain,
-      title: 'Memory Techniques',
-      description: 'Scientific concept chunking and active recall methods that make retention effortless and stress-free.',
+      title: t('why.benefit3Title'),
+      description: t('why.benefit3Desc'),
     },
     {
       icon: Cpu,
-      title: 'Problem-Solving & Technology',
-      description: 'Independent problem-solving heuristics supported by modern digital mathematics learning tools.',
+      title: t('why.benefit4Title'),
+      description: t('why.benefit4Desc'),
     },
   ];
 
@@ -32,10 +35,10 @@ export const WhyBrainSetuSection: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            More Than Just Learning
+            {t('why.title')}
           </h2>
           <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            BrainSetu combines mathematics, cognitive development, memory techniques, mentoring, and technology to create a more meaningful learning experience.
+            {t('why.subtitle')}
           </p>
         </div>
 

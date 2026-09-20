@@ -1,28 +1,31 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const TechEcosystemSection: React.FC = () => {
+  const { t } = useLanguage();
+
   const pillars = [
     {
-      title: 'Physical Learning',
-      desc: 'Expert mentor-led instruction, interactive Socratic discussions, and personal attention to build confidence.',
+      title: t('tech.pillar1Title'),
+      desc: t('tech.pillar1Desc'),
     },
     {
-      title: 'Digital Learning',
-      desc: 'Dynamic mathematics visualizations, interactive geometry tools, and gamified practice to make concepts intuitive.',
+      title: t('tech.pillar2Title'),
+      desc: t('tech.pillar2Desc'),
     },
     {
-      title: 'AI Support',
-      desc: 'Intelligent diagnostic assessments, personalized revision recommendations, and progress tracking.',
+      title: t('tech.pillar3Title'),
+      desc: t('tech.pillar3Desc'),
     },
   ];
 
   const features = [
-    'Interactive learning',
-    'Digital practice',
-    'Gamification',
-    'Assessments',
-    'Progress tracking',
-    'Personalized practice',
+    t('tech.feat1'),
+    t('tech.feat2'),
+    t('tech.feat3'),
+    t('tech.feat4'),
+    t('tech.feat5'),
+    t('tech.feat6'),
   ];
 
   return (
@@ -32,10 +35,10 @@ export const TechEcosystemSection: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            Technology That Supports Learning — Not Replaces It
+            {t('tech.title')}
           </h2>
           <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            BrainSetu harmonizes physical mentorship with digital tools to deepen comprehension and practice consistency.
+            {t('tech.subtitle')}
           </p>
         </div>
 
@@ -74,7 +77,7 @@ export const TechEcosystemSection: React.FC = () => {
             {/* Feature Bullets */}
             <div className="pt-2">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
-                Key Learning Capabilities:
+                {t('tech.keyCapabilities')}
               </p>
               <div className="flex flex-wrap gap-2">
                 {features.map((feat, i) => (

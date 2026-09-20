@@ -9,17 +9,20 @@ import {
   Award, 
   Sprout 
 } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const StudentDevelopmentSection: React.FC = () => {
+  const { t } = useLanguage();
+
   const outcomes = [
-    { name: 'Memory', desc: 'Concept chunking and structured recall techniques.', icon: Brain },
-    { name: 'Concentration', desc: 'Sustained focus and selective attention stamina.', icon: Target },
-    { name: 'Reasoning', desc: 'Deductive inquiry and validation of logical steps.', icon: Search },
-    { name: 'Creativity', desc: 'Exploring multiple paths to solve complex problems.', icon: Lightbulb },
-    { name: 'Problem-Solving', desc: 'Heuristic toolkits to approach unfamiliar challenges.', icon: Puzzle },
-    { name: 'Logical Thinking', desc: 'Sequential and algorithmic thought clarity.', icon: Binary },
-    { name: 'Academic Confidence', desc: 'Poise and composure during rigorous examinations.', icon: Award },
-    { name: 'Independent Learning', desc: 'Autonomous study habits and metacognition.', icon: Sprout },
+    { name: t('dev.outcome1Title'), desc: t('dev.outcome1Desc'), icon: Brain },
+    { name: t('dev.outcome2Title'), desc: t('dev.outcome2Desc'), icon: Target },
+    { name: t('dev.outcome3Title'), desc: t('dev.outcome3Desc'), icon: Search },
+    { name: t('dev.outcome4Title'), desc: t('dev.outcome4Desc'), icon: Lightbulb },
+    { name: t('dev.outcome5Title'), desc: t('dev.outcome5Desc'), icon: Puzzle },
+    { name: t('dev.outcome6Title'), desc: t('dev.outcome6Desc'), icon: Binary },
+    { name: t('dev.outcome7Title'), desc: t('dev.outcome7Desc'), icon: Award },
+    { name: t('dev.outcome8Title'), desc: t('dev.outcome8Desc'), icon: Sprout },
   ];
 
   return (
@@ -29,10 +32,10 @@ export const StudentDevelopmentSection: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            Learning Beyond Marks
+            {t('dev.title')}
           </h2>
           <p className="text-base sm:text-lg text-brand-slate-muted leading-relaxed">
-            We cultivate eight foundational cognitive and academic faculties that prepare students for lifetime intellectual growth.
+            {t('dev.subtitle')}
           </p>
         </div>
 
