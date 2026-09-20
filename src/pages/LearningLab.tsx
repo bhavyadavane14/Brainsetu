@@ -5,7 +5,6 @@ import {
   Sparkles, 
   Flame, 
   Home, 
-  Database, 
   BookOpen, 
   RefreshCw
 } from 'lucide-react';
@@ -14,21 +13,14 @@ import { BrainSetuLogo } from '../assets/logo/BrainSetuLogo';
 import { SEO } from '../components/common/SEO';
 
 export const LearningLab: React.FC = () => {
-  const { user, logout, saveProgress, isFirebaseActive } = useAuth();
-  const [synced, setSynced] = useState(false);
+  const { user, logout } = useAuth();
+  const [showWelcome, setShowWelcome] = useState(true);
   const [iframeKey, setIframeKey] = useState(1);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
     navigate('/');
-  };
-
-  // Sync test / manual milestone save
-  const handleManualSync = async () => {
-    setSynced(true);
-    await saveProgress(25, 'Mission Practice Milestone');
-    setTimeout(() => setSynced(false), 2000);
   };
 
   return (
@@ -75,17 +67,6 @@ export const LearningLab: React.FC = () => {
                   Sparks: <strong className="text-cyan-300 font-bold">{user?.xp || 150} XP</strong>
                 </span>
               </div>
-
-              <button
-                onClick={handleManualSync}
-                title="Save progress to database"
-                className="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors flex items-center gap-1.5"
-              >
-                <Database className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden sm:inline">
-                  {synced ? 'Saved!' : (isFirebaseActive ? 'Firebase Sync' : 'DB Sync')}
-                </span>
-              </button>
             </div>
 
             {/* Right: User Profile & Actions */}
@@ -126,6 +107,35 @@ export const LearningLab: React.FC = () => {
 
           </div>
         </header>
+
+        {/* Personalized Welcome Banner */}
+        {showWelcome && (
+          <div className="bg-gradient-to-r from-brand-primary-deep/90 via-brand-navy-900 to-cyan-950 border-b border-cyan-500/30 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs sm:text-sm animate-fadeIn shadow-inner">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-base flex-shrink-0">
+                ✨
+              </div>
+              <div>
+                <p className="font-bold text-white flex items-center gap-2">
+                  <span>Welcome back, {user?.displayName || 'Student'}!</span>
+                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-medium">
+                    Neural Bridge Active
+                  </span>
+                </p>
+                <p className="text-slate-300 text-xs mt-0.5">
+                  Your Learning Lab workspace is ready. Dive into today's memory scaffolding and interactive simulations!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowWelcome(false)}
+              className="text-slate-400 hover:text-white px-2.5 py-1 rounded-lg hover:bg-slate-800 transition-colors text-xs font-semibold flex items-center gap-1"
+              title="Close welcome message"
+            >
+              ✕ <span className="hidden sm:inline">Dismiss</span>
+            </button>
+          </div>
+        )}
 
         {/* Embedded Interactive Module Container */}
         <main className="flex-1 flex flex-col bg-slate-950 relative overflow-hidden">

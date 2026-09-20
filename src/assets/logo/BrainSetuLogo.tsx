@@ -13,7 +13,7 @@ export const BrainSetuLogo: React.FC<BrainSetuLogoProps> = ({
   variant = 'light',
   showTagline = false,
   className = '',
-  iconSize = 46,
+  iconSize = 58,
   layout = 'horizontal',
 }) => {
   const isDark = variant === 'dark';

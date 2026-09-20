@@ -86,7 +86,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
             <div className="flex-shrink-0">
-              <BrainSetuLogo />
+              <BrainSetuLogo iconSize={64} />
             </div>
 
             {/* Desktop: ONLY Home, Programs, Contact */}
