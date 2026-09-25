@@ -44,9 +44,7 @@ export const LearningLab: React.FC = () => {
             
             {/* Left: Branding & Module Title */}
             <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-              <Link to="/" className="hover:opacity-90 transition-opacity">
-                <BrainSetuLogo variant="dark" iconSize={32} />
-              </Link>
+              <BrainSetuLogo variant="dark" iconSize={32} />
               <div className="h-6 w-px bg-slate-700 hidden sm:block"></div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-950 text-cyan-400 border border-cyan-800/80">
