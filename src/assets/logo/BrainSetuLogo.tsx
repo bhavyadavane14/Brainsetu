@@ -17,9 +17,11 @@ export const BrainSetuLogo: React.FC<BrainSetuLogoProps> = ({
   layout = 'horizontal',
 }) => {
   const isDark = variant === 'dark';
-  const logoSrc = layout === 'stacked'
-    ? '/images/brainsetu-logo-transparent.png'
-    : '/images/brainsetu-logo-horizontal.png';
+  const logoSrc = isDark
+    ? '/images/brainsetu-logo-dark.png'
+    : layout === 'stacked'
+      ? '/images/brainsetu-logo-transparent.png'
+      : '/images/brainsetu-logo-horizontal.png';
 
   return (
     <Link 
