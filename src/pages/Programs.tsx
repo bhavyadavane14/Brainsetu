@@ -44,9 +44,6 @@ export const Programs: React.FC = () => {
         {/* Hero Banner */}
         <section className="py-14 sm:py-20 bg-gradient-to-b from-white via-brand-slate-bluebg/50 to-brand-slate-bg text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-              Transformative Educational Offerings
-            </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
               Programs Designed for <span className="text-gradient">Smarter Learning</span>
             </h1>

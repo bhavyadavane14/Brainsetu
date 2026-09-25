@@ -63,17 +63,17 @@ export const Navbar: React.FC = () => {
 
   // Drawer menu links
   const drawerLinks = [
-    { name: 'About Us', path: '/about', icon: Info, desc: 'Our vision, philosophy and mission' },
-    { name: 'Learning Approach', path: '/learning-approach', icon: GraduationCap, desc: 'The 6-step mastery methodology' },
-    { name: 'Technology', path: '/technology', icon: Cpu, desc: 'Digital practice & Intellia360 tools' },
-    { name: 'Student Development', path: '/student-development', icon: Brain, desc: 'Cognitive skills & growth beyond marks' },
-    { name: 'For Parents', path: '/parents', icon: Users, desc: 'Parent guidance and learning gap diagnosis' },
-    { name: 'Contact & Admissions', path: '/contact', icon: Phone, desc: 'Schedule a diagnostic consultation' },
+    { name: t('nav.about'), path: '/about', icon: Info, desc: t('nav.aboutDesc') },
+    { name: t('nav.approach'), path: '/learning-approach', icon: GraduationCap, desc: t('nav.approachDesc') },
+    { name: t('nav.tech'), path: '/technology', icon: Cpu, desc: t('nav.techDesc') },
+    { name: t('nav.studentDev'), path: '/student-development', icon: Brain, desc: t('nav.studentDevDesc') },
+    { name: t('nav.forParents'), path: '/parents', icon: Users, desc: t('nav.forParentsDesc') },
+    { name: t('nav.contactAdmissions'), path: '/contact', icon: Phone, desc: t('nav.contactDesc') },
   ];
 
   const legalLinks = [
-    { name: 'Privacy Policy', path: '/privacy-policy', icon: Shield },
-    { name: 'Terms & Conditions', path: '/terms', icon: FileText },
+    { name: t('nav.privacyPolicy'), path: '/privacy-policy', icon: Shield },
+    { name: t('nav.terms'), path: '/terms', icon: FileText },
   ];
 
   return (
@@ -210,7 +210,7 @@ export const Navbar: React.FC = () => {
                         onClick={logout}
                         className="text-[11px] text-slate-400 hover:text-rose-300 font-medium transition-colors"
                       >
-                        Logout
+                        {t('nav.logout')}
                       </button>
                     </div>
 
@@ -220,17 +220,17 @@ export const Navbar: React.FC = () => {
                       className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-brand-secondary to-brand-primary text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm hover:opacity-95 transition-opacity"
                     >
                       <Brain className="w-3.5 h-3.5" />
-                      <span>Launch Neural Memory Lab</span>
+                      <span>{t('nav.launchLab')}</span>
                     </Link>
                   </div>
                 ) : (
                   <div className="space-y-2.5 text-center">
                     <div className="text-left">
                       <span className="text-xs font-bold text-cyan-300 uppercase tracking-wider block">
-                        Student Portal
+                        {t('nav.studentPortal')}
                       </span>
                       <p className="text-[11px] text-slate-300 mt-0.5">
-                        Sign in to access the Neural Memory Lab (Module 3) & save progress.
+                        {t('nav.studentPortalDesc')}
                       </p>
                     </div>
 
@@ -240,14 +240,14 @@ export const Navbar: React.FC = () => {
                         onClick={() => setMenuOpen(false)}
                         className="py-1.5 px-3 rounded-xl bg-white text-brand-primary-deep text-xs font-bold text-center hover:bg-slate-100 transition-colors"
                       >
-                        Sign In
+                        {t('nav.signIn')}
                       </Link>
                       <Link
                         to="/signup"
                         onClick={() => setMenuOpen(false)}
                         className="py-1.5 px-3 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-bold text-center hover:bg-cyan-500/30 transition-colors"
                       >
-                        Register
+                        {t('nav.register')}
                       </Link>
                     </div>
                   </div>
@@ -257,7 +257,7 @@ export const Navbar: React.FC = () => {
               {/* Quick Navigation Links */}
               <div className="p-5 space-y-1">
                 <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pb-2">
-                  Navigation
+                  {t('nav.navigation')}
                 </div>
 
                 <NavLink
@@ -270,7 +270,7 @@ export const Navbar: React.FC = () => {
                     }`
                   }
                 >
-                  <span>Home</span>
+                  <span>{t('nav.home')}</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                 </NavLink>
 
@@ -284,13 +284,13 @@ export const Navbar: React.FC = () => {
                     }`
                   }
                 >
-                  <span>Programs & Masterclasses</span>
+                  <span>{t('nav.programsMasterclasses')}</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                 </NavLink>
 
                 <div className="pt-3 pb-1">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pb-2">
-                    Explore BrainSetu
+                    {t('nav.explore')}
                   </div>
                 </div>
 
@@ -334,7 +334,7 @@ export const Navbar: React.FC = () => {
                   <MapPin className="w-4 h-4 text-brand-primary flex-shrink-0 mt-0.5" />
                   <div className="text-[11px] leading-tight text-slate-700">
                     <span className="font-bold text-brand-primary-deep block">BrainSetu Academy</span>
-                    <span>Feliz Flow Studio, Next to Hiranandani Trust School, Panvel – 410207</span>
+                    <span>{t('nav.academyAddress')}</span>
                   </div>
                 </div>
 
@@ -367,7 +367,7 @@ export const Navbar: React.FC = () => {
                   setEnquiryModalOpen(true);
                 }}
               >
-                Book Diagnostic Consultation
+                {t('nav.bookConsultation')}
               </Button>
 
               <div className="flex items-center justify-between text-xs text-slate-500 pt-1">

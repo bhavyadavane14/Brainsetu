@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { 
   BarChart2, 
   TrendingUp, 
-  Info, 
   ArrowRight
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
@@ -11,9 +10,11 @@ import { SectionHeader } from '../components/common/SectionHeader';
 import { developmentSkills, illustrativeDashboardMetrics } from '../data/skills';
 import { Button } from '../components/common/Button';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const StudentDevelopment: React.FC = () => {
   const [activeSkillId, setActiveSkillId] = useState<string>(developmentSkills[0].id);
+  const { t } = useLanguage();
 
   const activeSkill = developmentSkills.find((s) => s.id === activeSkillId) || developmentSkills[0];
 
@@ -28,21 +29,18 @@ export const StudentDevelopment: React.FC = () => {
         {/* Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'Student Development' }]} />
+            <Breadcrumbs items={[{ label: t('studentDev.breadcrumb') }]} />
           </div>
         </div>
 
         {/* Hero Section */}
         <section className="py-14 sm:py-20 bg-gradient-to-b from-white via-brand-slate-bluebg/60 to-brand-slate-bg border-b border-slate-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-              Cognitive & Psychological Growth
-            </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-              Learning <span className="text-gradient">Beyond Marks</span>
+              {t('studentDev.heroTitle')}
             </h1>
             <p className="text-base sm:text-lg text-brand-slate-muted max-w-2xl mx-auto leading-relaxed">
-              When students cultivate cognitive resilience, deep attention, and logical deduction, high exam performance follows naturally as a byproduct.
+              {t('studentDev.heroSubtitle')}
             </p>
           </div>
         </section>
@@ -154,10 +152,6 @@ export const StudentDevelopment: React.FC = () => {
         <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-3">
-                <Info className="w-3.5 h-3.5" />
-                <span>Illustrative Concept Preview</span>
-              </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-white">
                 Intellia360 Cognitive Progress Dashboard
               </h2>

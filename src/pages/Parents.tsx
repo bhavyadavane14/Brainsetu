@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { 
-  HeartHandshake, 
-  Sparkles, 
   ArrowRight, 
   Search, 
   TrendingUp, 
   MessageSquare, 
   Home as HomeIcon,
-  ShieldCheck
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -17,9 +16,11 @@ import { Button } from '../components/common/Button';
 import { EnquiryModal } from '../components/common/EnquiryModal';
 import { ContactInfoBadge } from '../components/common/ContactInfoBadge';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Parents: React.FC = () => {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const { t } = useLanguage();
 
   const pillarIcons: React.ElementType[] = [Search, ShieldCheck, TrendingUp, MessageSquare, HomeIcon];
 
@@ -34,7 +35,7 @@ export const Parents: React.FC = () => {
         {/* Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'For Parents' }]} />
+            <Breadcrumbs items={[{ label: t('parents.breadcrumb') }]} />
           </div>
         </div>
 
@@ -44,18 +45,12 @@ export const Parents: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-brand-secondary text-xs font-bold uppercase tracking-wider">
-                  <HeartHandshake className="w-3.5 h-3.5" />
-                  <span>The Parent-Mentor Partnership</span>
-                </div>
-
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-                  Helping Parents Understand{' '}
-                  <span className="text-gradient">How Their Child Learns</span>
+                  {t('parents.heroTitle')}
                 </h1>
 
                 <p className="text-base sm:text-lg text-brand-navy-700 leading-relaxed">
-                  Math anxiety is rarely a lack of intelligence; it is almost always an unaddressed prerequisite concept gap or mechanical teaching method. We empower parents with clarity, empathy, and actionable frameworks.
+                  {t('parents.heroSubtitle')}
                 </p>
 
                 <div className="pt-3 flex flex-wrap items-center gap-3">
@@ -65,14 +60,14 @@ export const Parents: React.FC = () => {
                     onClick={() => setEnquiryOpen(true)}
                     icon={<ArrowRight className="w-4 h-4" />}
                   >
-                    Book a Counselling / Assessment Enquiry
+                    {t('parents.bookBtn')}
                   </Button>
                   <Button
                     to="/programs"
                     variant="outline"
                     size="lg"
                   >
-                    Explore Recommended Tracks
+                    {t('parents.exploreBtn')}
                   </Button>
                 </div>
               </div>

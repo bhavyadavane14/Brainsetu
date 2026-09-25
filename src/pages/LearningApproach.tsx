@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   Sparkles, 
   Brain, 
-  AlertTriangle, 
   Layers, 
   Zap, 
   RotateCcw, 
@@ -15,8 +14,11 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { journeyStepsData, cognitiveTechniquesData } from '../data/approach';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const LearningApproach: React.FC = () => {
+  const { t } = useLanguage();
+
   const techniqueIcons: Record<string, React.ElementType> = {
     chunking: Layers,
     connections: GitMerge,
@@ -37,21 +39,18 @@ export const LearningApproach: React.FC = () => {
         {/* Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'Learning Approach' }]} />
+            <Breadcrumbs items={[{ label: t('approach.breadcrumb') }]} />
           </div>
         </div>
 
         {/* Hero Section */}
         <section className="py-14 sm:py-20 bg-gradient-to-b from-white via-brand-slate-bluebg/60 to-brand-slate-bg border-b border-slate-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-              Proprietary Pedagogical Architecture
-            </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-              The BrainSetu <span className="text-gradient">Learning Approach</span>
+              {t('approach.heroTitle')}
             </h1>
             <p className="text-base sm:text-lg text-brand-slate-muted max-w-2xl mx-auto leading-relaxed">
-              Moving from mechanical memorization to enduring understanding through structured cognitive progressions and scientific memory encoding.
+              {t('approach.heroSubtitle')}
             </p>
           </div>
         </section>
@@ -113,26 +112,6 @@ export const LearningApproach: React.FC = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Critical Messaging Banner */}
-        <section className="py-10 bg-amber-500/10 border-y border-amber-300/40">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/90 border border-amber-300 shadow-sm">
-              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <h4 className="text-sm font-display font-bold text-amber-900 uppercase tracking-wider">
-                  Important Pedagogical Axiom
-                </h4>
-                <p className="text-base sm:text-lg font-display font-bold text-brand-primary-deep mt-0.5">
-                  “Memory techniques support conceptual learning. They are not a replacement for understanding.”
-                </p>
-                <p className="text-xs sm:text-sm text-brand-slate-muted mt-1">
-                  We use memory frameworks to relieve cognitive load and test anxiety so the student’s mind is completely free to reason, analyze, and synthesize.
-                </p>
-              </div>
             </div>
           </div>
         </section>

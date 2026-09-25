@@ -17,8 +17,10 @@ import { siteConfig } from '../data/siteConfig';
 import { programsData } from '../data/programs';
 import { Button } from '../components/common/Button';
 import { db, isFirebaseConfigured, collection, addDoc, serverTimestamp } from '../lib/firebase';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Contact: React.FC = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     studentClass: '',
@@ -76,21 +78,18 @@ export const Contact: React.FC = () => {
         {/* Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'Contact / Enquire' }]} />
+            <Breadcrumbs items={[{ label: t('contact.breadcrumb') }]} />
           </div>
         </div>
 
         {/* Hero Section */}
         <section className="py-12 sm:py-16 bg-gradient-to-b from-white via-brand-slate-bluebg/50 to-brand-slate-bg border-b border-slate-200 text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-              Admissions & Diagnostic Consultations
-            </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-              Let’s Build a <span className="text-gradient">Better Learning Journey</span>
+              {t('contact.heroTitle')}
             </h1>
             <p className="text-base sm:text-lg text-brand-slate-muted max-w-2xl mx-auto">
-              Share your child’s educational goals and learning needs. Our academic counsellors will help map out the ideal learning pathway.
+              {t('contact.heroSubtitle')}
             </p>
           </div>
         </section>

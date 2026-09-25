@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
-  Cpu, 
-  Lock, 
   ArrowRight
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { SectionHeader } from '../components/common/SectionHeader';
-import { intellia360Features, futurePlatformRoadmap } from '../data/ecosystem';
+import { intellia360Features } from '../data/ecosystem';
 import { Button } from '../components/common/Button';
-import { FuturePortalModal } from '../components/common/FuturePortalModal';
 import { CTASection } from '../components/sections/CTASection';
+import { EnquiryModal } from '../components/common/EnquiryModal';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Technology: React.FC = () => {
-  const [portalOpen, setPortalOpen] = useState(false);
-  const [activePortalRole, setActivePortalRole] = useState<'Student' | 'Parent' | 'Teacher'>('Student');
-
-  const openPortalWithRole = (role: 'Student' | 'Parent' | 'Teacher') => {
-    setActivePortalRole(role);
-    setPortalOpen(true);
-  };
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -32,7 +28,7 @@ export const Technology: React.FC = () => {
         {/* Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'Technology & AI' }]} />
+            <Breadcrumbs items={[{ label: t('technology.breadcrumb') }]} />
           </div>
         </div>
 
@@ -42,35 +38,29 @@ export const Technology: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-brand-secondary text-xs font-bold uppercase tracking-wider">
-                  <Cpu className="w-3.5 h-3.5" />
-                  <span>The Tripartite Learning Paradigm</span>
-                </div>
-
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-                  Technology That Amplifies{' '}
-                  <span className="text-gradient">Human Understanding</span>
+                  {t('technology.heroTitle')}
                 </h1>
 
                 <p className="text-base sm:text-lg text-brand-navy-700 leading-relaxed">
-                  We believe technology should never replace the empathy and diagnostic intuition of a master educator. Instead, it serves as an interactive cognitive prosthesis that makes abstract mathematics tangible, visual, and measurable.
+                  {t('technology.heroSubtitle')}
                 </p>
 
                 <div className="pt-2 flex flex-wrap items-center gap-3">
                   <Button
                     variant="primary"
                     size="md"
-                    onClick={() => openPortalWithRole('Student')}
+                    onClick={() => navigate('/programs')}
                     icon={<ArrowRight className="w-4 h-4" />}
                   >
-                    Preview Student Portal
+                    {t('technology.exploreBtn')}
                   </Button>
                   <Button
                     variant="outline"
                     size="md"
-                    onClick={() => openPortalWithRole('Parent')}
+                    onClick={() => setEnquiryOpen(true)}
                   >
-                    Preview Parent Hub
+                    {t('technology.enquireBtn')}
                   </Button>
                 </div>
               </div>
@@ -199,77 +189,15 @@ export const Technology: React.FC = () => {
           </div>
         </section>
 
-        {/* Future Learning Platform Showcase (Clearly marked Coming in Future Phase) */}
-        <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-3">
-                <Lock className="w-3.5 h-3.5" />
-                <span>Phase 2 Architecture Preview</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white">
-                Future Learning Platform Modules
-              </h2>
-              <p className="mt-3 text-sm text-slate-300">
-                These capabilities are currently in active architectural preparation for the Phase 2 release. Explore the upcoming feature blueprints below:
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {futurePlatformRoadmap.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 rounded-2xl bg-slate-800/80 border border-slate-700/80 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">
-                        {item.category}
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                        Coming in Future Phase
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-display font-bold text-white">
-                      {item.title}
-                    </h3>
-
-                    <ul className="mt-4 space-y-2 text-xs text-slate-300">
-                      {item.features.map((f, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-slate-700">
-                    <button
-                      type="button"
-                      onClick={() => setPortalOpen(true)}
-                      className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors"
-                    >
-                      <span>Preview Portal Blueprint</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <CTASection />
-      </main>
 
-      <FuturePortalModal
-        isOpen={portalOpen}
-        onClose={() => setPortalOpen(false)}
-        defaultRole={activePortalRole}
-      />
+        {/* Enquiry Modal */}
+        <EnquiryModal
+          isOpen={enquiryOpen}
+          onClose={() => setEnquiryOpen(false)}
+        />
+      </main>
     </>
   );
 };

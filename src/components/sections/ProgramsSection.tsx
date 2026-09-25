@@ -27,9 +27,6 @@ export const ProgramsSection: React.FC = () => {
         {/* Section Header */}
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-50 text-brand-secondary border border-cyan-200">
-              {t('programs.sectionBadge')}
-            </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-brand-primary-deep tracking-tight">
               {t('programs.sectionTitle')}
             </h2>

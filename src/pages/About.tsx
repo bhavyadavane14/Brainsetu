@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Sparkles, 
   CheckCircle2, 
   Award,
   Zap
@@ -10,8 +9,11 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { siteConfig } from '../data/siteConfig';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const About: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <>
       <SEO
@@ -23,7 +25,7 @@ export const About: React.FC = () => {
         {/* Header Breadcrumb Banner */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'About Us' }]} />
+            <Breadcrumbs items={[{ label: t('about.breadcrumb') }]} />
           </div>
         </div>
 
@@ -33,35 +35,30 @@ export const About: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               
               <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-brand-secondary text-xs font-bold uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>The Story Behind The Bridge</span>
-                </div>
-
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight leading-tight">
-                  About <span className="text-gradient">BrainSetu Academy</span>
+                  {t('about.heroTitle')}
                 </h1>
 
                 <p className="text-lg text-brand-navy-700 leading-relaxed">
-                  BrainSetu Academy is a modern learning and student-development initiative engineered to eliminate mechanical, anxiety-driven rote memorization from education.
+                  {t('about.heroDesc1')}
                 </p>
 
                 <p className="text-sm sm:text-base text-brand-slate-muted leading-relaxed">
-                  The word <strong>"Setu"</strong> means bridge. BrainSetu embodies the intellectual and psychological bridge connecting:
+                  {t('about.heroDesc2')}
                 </p>
 
                 {/* The 5-Point Bridge Progression */}
                 <div className="p-4 rounded-2xl bg-white border border-cyan-200 shadow-soft">
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold text-brand-primary-deep">
-                    <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-brand-primary">Knowledge</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-brand-primary">{t('about.bridgeKnowledge')}</span>
                     <span className="text-cyan-500 font-black">→</span>
-                    <span className="px-2.5 py-1 rounded-lg bg-cyan-50 text-brand-secondary">Memory</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-cyan-50 text-brand-secondary">{t('about.bridgeMemory')}</span>
                     <span className="text-cyan-500 font-black">→</span>
-                    <span className="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-700">Concepts</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-teal-50 text-teal-700">{t('about.bridgeConcepts')}</span>
                     <span className="text-cyan-500 font-black">→</span>
-                    <span className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700">Application</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700">{t('about.bridgeApplication')}</span>
                     <span className="text-cyan-500 font-black">→</span>
-                    <span className="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700">Potential</span>
+                    <span className="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700">{t('about.bridgePotential')}</span>
                   </div>
                 </div>
               </div>
