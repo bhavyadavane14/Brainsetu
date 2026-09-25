@@ -54,7 +54,9 @@ export const Signup: React.FC = () => {
       await loginWithGoogle();
       navigate(redirectPath, { replace: true });
     } catch (err: any) {
-      setError(err?.message || 'Google sign-up was interrupted.');
+      if (!err?.message?.includes('popup was closed') && err?.code !== 'auth/popup-closed-by-user') {
+        setError(err?.message || 'Google sign-up was interrupted.');
+      }
     } finally {
       setSubmitting(false);
     }
