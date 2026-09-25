@@ -49,10 +49,8 @@ export const StudentDevelopment: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Cognitive Taxonomy"
-              title="The Nine Pillars of"
-              highlightText="Student Development"
-              subtitle="Click each skill to explore its cognitive mechanism and the exact pedagogical drills used at BrainSetu Academy."
+              title={t('studentDev.pillarsTitle')}
+              subtitle={t('studentDev.pillarsSubtitle')}
               align="center"
             />
 
@@ -107,14 +105,14 @@ export const StudentDevelopment: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
                     <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm">
                       <span className="font-bold text-brand-primary block text-xs uppercase tracking-wider mb-1">
-                        Cognitive & Academic Benefit:
+                        {t('studentDev.mechanismLabel', 'Cognitive & Academic Benefit:')}
                       </span>
                       <span className="text-brand-slate-muted">{activeSkill.cognitiveBenefit}</span>
                     </div>
 
                     <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm">
                       <span className="font-bold text-brand-secondary block text-xs uppercase tracking-wider mb-1">
-                        BrainSetu Training Protocol:
+                        {t('studentDev.drillLabel', 'BrainSetu Training Protocol:')}
                       </span>
                       <span className="text-brand-slate-muted">{activeSkill.pedagogicalTechnique}</span>
                     </div>
@@ -153,10 +151,10 @@ export const StudentDevelopment: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold text-white">
-                Intellia360 Cognitive Progress Dashboard
+                {t('studentDev.trackingTitle', 'Intellia360 Cognitive Progress Dashboard')}
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-slate-300">
-                A blueprint of how mentors and parents will monitor multi-dimensional student growth in Phase 2.
+                {t('studentDev.trackingSubtitle', 'A blueprint of how mentors and parents will monitor multi-dimensional student growth in Phase 2.')}
               </p>
             </div>
 

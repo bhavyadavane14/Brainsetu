@@ -81,10 +81,10 @@ export const About: React.FC = () => {
         <section className="py-16 bg-brand-primary-deep text-white relative">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
-              Our Vision
+              {t('about.visionBadge')}
             </span>
             <blockquote className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold leading-snug text-slate-100">
-              “{siteConfig.vision}”
+              “{t('about.visionQuote')}”
             </blockquote>
           </div>
         </section>
@@ -93,15 +93,13 @@ export const About: React.FC = () => {
         <section className="py-20 bg-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
             <SectionHeader
-              badge="Guiding Principle"
-              title="Our"
-              highlightText="Philosophy"
+              title={t('about.philosophyHeading')}
               align="center"
             />
 
             <div className="p-8 sm:p-12 rounded-3xl bg-brand-slate-bg border border-cyan-100 shadow-soft">
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep leading-tight">
-                “Learning should create understanding, not just recall.”
+                {t('about.philosophyQuote')}
               </h2>
 
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
@@ -109,11 +107,11 @@ export const About: React.FC = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <Zap className="w-5 h-5 text-brand-secondary" />
                     <h3 className="font-bold text-base text-brand-primary-deep">
-                      Active Participation
+                      {t('about.activePartTitle')}
                     </h3>
                   </div>
                   <p className="text-sm text-brand-slate-muted leading-relaxed">
-                    Students should actively participate in their learning journey—questioning, experimenting, deriving, and defending conclusions rather than passively absorbing formulas.
+                    {t('about.activePartDesc')}
                   </p>
                 </div>
 
@@ -121,11 +119,11 @@ export const About: React.FC = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <Award className="w-5 h-5 text-brand-accent" />
                     <h3 className="font-bold text-base text-brand-primary-deep">
-                      Holistic Development
+                      {t('about.holisticDevTitle')}
                     </h3>
                   </div>
                   <p className="text-sm text-brand-slate-muted leading-relaxed">
-                    Academic performance and lifelong cognitive skills should develop together. High exam scores are natural outcomes of genuine intellectual mastery.
+                    {t('about.holisticDevDesc')}
                   </p>
                 </div>
               </div>
@@ -137,10 +135,8 @@ export const About: React.FC = () => {
         <section className="py-20 bg-brand-slate-bg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Purpose In Action"
-              title="Our Eight-Fold"
-              highlightText="Mission"
-              subtitle="The specific, measurable commitments that steer our curriculum, mentorship, and technology."
+              title={t('about.missionTitle')}
+              subtitle={t('about.missionSubtitle')}
               align="center"
             />
 
@@ -155,16 +151,16 @@ export const About: React.FC = () => {
                       0{idx + 1}
                     </span>
                     <h3 className="text-lg font-display font-bold text-brand-primary-deep">
-                      {mission.title}
+                      {t(`about.mission${idx + 1}Title`, mission.title)}
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-brand-slate-muted leading-relaxed">
-                      {mission.desc}
+                      {t(`about.mission${idx + 1}Desc`, mission.desc)}
                     </p>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1 text-[11px] font-bold text-brand-secondary">
                     <CheckCircle2 className="w-3.5 h-3.5 text-brand-secondary" />
-                    <span>Core Pillar</span>
+                    <span>{t('about.corePillar')}</span>
                   </div>
                 </div>
               ))}

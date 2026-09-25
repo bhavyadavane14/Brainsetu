@@ -90,10 +90,8 @@ export const Parents: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Parental Enablement"
-              title="Five Pillars of Our"
-              highlightText="Parent Guidance"
-              subtitle="Concrete ways we keep parents informed, supported, and confident in their child's academic journey."
+              title={t('parents.pillarsTitle')}
+              subtitle={t('parents.pillarsSubtitle')}
               align="center"
             />
 
@@ -111,11 +109,11 @@ export const Parents: React.FC = () => {
                     </div>
 
                     <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                      {pillar.title}
+                      {t(`parents.pillar${idx + 1}Title`, pillar.title)}
                     </h3>
 
                     <p className="mt-2 text-sm text-brand-slate-muted leading-relaxed">
-                      {pillar.description}
+                      {t(`parents.pillar${idx + 1}Desc`, pillar.description)}
                     </p>
                   </div>
                 );
@@ -128,10 +126,8 @@ export const Parents: React.FC = () => {
         <section className="py-16 bg-brand-slate-bg border-t border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Seamless Admissions & Growth"
-              title="The Seven-Step"
-              highlightText="Parent Journey"
-              subtitle="From your initial inquiry to continuous milestone reviews, here is what partnering with BrainSetu looks like."
+              title={t('parents.journeyTitle')}
+              subtitle={t('parents.journeySubtitle')}
               align="center"
             />
 
@@ -169,7 +165,7 @@ export const Parents: React.FC = () => {
                 onClick={() => setEnquiryOpen(true)}
                 icon={<ArrowRight className="w-4 h-4" />}
               >
-                Book a Counselling / Assessment Enquiry
+                {t('parents.bookBtn')}
               </Button>
 
               <div className="max-w-3xl mx-auto pt-6">

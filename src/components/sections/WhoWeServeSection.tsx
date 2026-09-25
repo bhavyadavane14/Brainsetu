@@ -3,16 +3,17 @@ import { ArrowRight } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { siteConfig } from '../../data/siteConfig';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const WhoWeServeSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 bg-brand-slate-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Tailored Developmental Stages"
-          title="Learning Designed for"
-          highlightText="Every Stage"
-          subtitle="From early play-based pattern recognition to advanced competitive Olympiad proofs, our curriculum adapts to each developmental milestone."
+          title={t('whoWeServe.title')}
+          subtitle={t('whoWeServe.subtitle')}
           align="center"
         />
 
@@ -26,23 +27,23 @@ export const WhoWeServeSection: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan-50 text-brand-secondary border border-cyan-200">
-                    {stage.badge}
+                    {t(`whoWeServe.stage${idx + 1}Badge`, stage.badge)}
                   </span>
                   <span className="text-xs font-semibold text-brand-slate-muted">
-                    {stage.ageSpan}
+                    {t(`whoWeServe.stage${idx + 1}Age`, stage.ageSpan)}
                   </span>
                 </div>
 
                 <h3 className="text-xl font-display font-bold text-brand-primary-deep group-hover:text-brand-secondary transition-colors">
-                  {stage.stage}
+                  {t(`whoWeServe.stage${idx + 1}Stage`, stage.stage)}
                 </h3>
 
                 <h4 className="mt-1 text-xs font-semibold text-brand-primary">
-                  {stage.headline}
+                  {t(`whoWeServe.stage${idx + 1}Headline`, stage.headline)}
                 </h4>
 
                 <p className="mt-3 text-xs sm:text-sm text-brand-slate-muted leading-relaxed">
-                  {stage.description}
+                  {t(`whoWeServe.stage${idx + 1}Desc`, stage.description)}
                 </p>
               </div>
 
@@ -51,7 +52,7 @@ export const WhoWeServeSection: React.FC = () => {
                   to="/programs"
                   className="text-xs font-bold text-brand-secondary group-hover:text-brand-primary flex items-center gap-1 transition-colors"
                 >
-                  <span>Explore Stage Tracks</span>
+                  <span>{t('whoWeServe.exploreBtn')}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

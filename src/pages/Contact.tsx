@@ -149,10 +149,10 @@ export const Contact: React.FC = () => {
                   <div>
                     <div className="mb-6">
                       <h2 className="text-xl sm:text-2xl font-display font-bold text-brand-primary-deep">
-                        Enquiry & Assessment Application
+                        {t('contact.formHeading', 'Enquiry & Assessment Application')}
                       </h2>
                       <p className="text-xs sm:text-sm text-brand-slate-muted mt-1">
-                        Fill in the details below. All fields marked with * are required.
+                        {t('contact.formSub', 'Fill in the details below. All fields marked with * are required.')}
                       </p>
                     </div>
 
@@ -160,12 +160,12 @@ export const Contact: React.FC = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                            Parent / Student Name *
+                            {t('contact.nameLabel', 'Parent / Student Name')} *
                           </label>
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Priya Iyer"
+                            placeholder={t('contact.namePlaceholder', 'e.g. Priya Iyer')}
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -173,12 +173,12 @@ export const Contact: React.FC = () => {
                         </div>
                         <div>
                           <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                            Student Age / Class *
+                            {t('contact.gradeLabel', 'Student Age / Class')} *
                           </label>
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Class 8 (Age 13)"
+                            placeholder={t('contact.gradePlaceholder', 'e.g. Class 8 (Age 13)')}
                             value={formData.studentClass}
                             onChange={(e) => setFormData({ ...formData, studentClass: e.target.value })}
                             className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -189,12 +189,12 @@ export const Contact: React.FC = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                            Phone Number *
+                            {t('contact.phoneLabel', 'Phone Number')} *
                           </label>
                           <input
                             type="tel"
                             required
-                            placeholder="e.g. +91 98765 43210"
+                            placeholder={t('contact.phonePlaceholder', '+91 98765 43210')}
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -202,11 +202,11 @@ export const Contact: React.FC = () => {
                         </div>
                         <div>
                           <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                            Email Address
+                            {t('contact.emailLabel', 'Email Address')}
                           </label>
                           <input
                             type="email"
-                            placeholder="e.g. parent@example.com"
+                            placeholder={t('contact.emailPlaceholder', 'parent@example.com')}
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -216,7 +216,7 @@ export const Contact: React.FC = () => {
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                          Preferred Program *
+                          {t('contact.programLabel', 'Preferred Program')} *
                         </label>
                         <select
                           value={formData.program}
@@ -236,7 +236,7 @@ export const Contact: React.FC = () => {
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1.5">
-                          Preferred Contact Method
+                          {t('contact.methodLabel', 'Preferred Contact Method')}
                         </label>
                         <div className="grid grid-cols-3 gap-3">
                           {[
@@ -266,11 +266,11 @@ export const Contact: React.FC = () => {
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy-700 mb-1">
-                          Learning Goal or Current Academic Challenge
+                          {t('contact.messageLabel', 'Learning Goal or Current Academic Challenge')}
                         </label>
                         <textarea
                           rows={3}
-                          placeholder="Describe any specific topics, math anxiety, or competitive aspirations..."
+                          placeholder={t('contact.messagePlaceholder', 'Describe any specific topics, math anxiety...')}
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           className="w-full px-4 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -286,7 +286,7 @@ export const Contact: React.FC = () => {
                           disabled={loading}
                           icon={<Send className="w-4 h-4" />}
                         >
-                          {loading ? 'Processing...' : 'Submit Enquiry'}
+                          {loading ? t('contact.submittingBtn', 'Processing...') : t('contact.submitBtn', 'Submit Enquiry')}
                         </Button>
                       </div>
                     </form>

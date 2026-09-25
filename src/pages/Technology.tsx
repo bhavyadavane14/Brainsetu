@@ -83,10 +83,8 @@ export const Technology: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Integrated Modalities"
-              title="Three Pillars of the"
-              highlightText="BrainSetu Experience"
-              subtitle="Each modality plays a distinct, non-redundant role in shaping the learner's intellectual journey."
+              title={t('technology.pillarsTitle')}
+              subtitle={t('technology.pillarsSubtitle')}
               align="center"
             />
 
@@ -97,13 +95,13 @@ export const Technology: React.FC = () => {
                   01
                 </div>
                 <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                  Physical Learning
+                  {t('technology.pillar1Title')}
                 </h3>
                 <span className="text-xs font-bold uppercase tracking-wider text-brand-secondary block">
-                  Human Mentor Interaction
+                  {t('technology.pillar1Tag')}
                 </span>
                 <p className="text-sm text-brand-slate-muted leading-relaxed">
-                  Direct dialogue with passionate mathematics mentors. Teachers perceive hesitation, emotional tension, and subtle cognitive stumbling blocks that no automated algorithm can detect.
+                  {t('technology.pillar1Desc')}
                 </p>
                 <ul className="space-y-2 text-xs text-brand-navy-700 pt-2 border-t border-slate-200">
                   <li className="flex items-center gap-2">✓ Socratic guiding questions</li>
@@ -118,13 +116,13 @@ export const Technology: React.FC = () => {
                   02
                 </div>
                 <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                  Digital Learning
+                  {t('technology.pillar2Title')}
                 </h3>
                 <span className="text-xs font-bold uppercase tracking-wider text-brand-secondary block">
-                  Dynamic Visual Manipulatives
+                  {t('technology.pillar2Tag')}
                 </span>
                 <p className="text-sm text-brand-slate-muted leading-relaxed">
-                  Formulas become interactive 3D objects. Students slide variables to see graphs morph in real time, transforming algebraic equations into vivid spatial intuition.
+                  {t('technology.pillar2Desc')}
                 </p>
                 <ul className="space-y-2 text-xs text-brand-navy-700 pt-2 border-t border-slate-200">
                   <li className="flex items-center gap-2">✓ Dynamic geometry engines</li>
@@ -139,13 +137,13 @@ export const Technology: React.FC = () => {
                   03
                 </div>
                 <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                  AI-Powered Learning
+                  {t('technology.pillar3Title')}
                 </h3>
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-700 block">
-                  Intellia360 Socratic Assistant
+                  {t('technology.pillar3Tag')}
                 </span>
                 <p className="text-sm text-brand-slate-muted leading-relaxed">
-                  Scheduled for Phase 2, our context-aware AI learning companion diagnoses where derivations break down and offers progressive hints instead of spoiling answers.
+                  {t('technology.pillar3Desc')}
                 </p>
                 <ul className="space-y-2 text-xs text-brand-navy-700 pt-2 border-t border-slate-200">
                   <li className="flex items-center gap-2">✓ Non-spoiler Socratic hints</li>
@@ -161,10 +159,8 @@ export const Technology: React.FC = () => {
         <section className="py-16 bg-brand-slate-bg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeader
-              badge="Digital Intelligence"
-              title="Powered by the Future-Ready"
-              highlightText="Intellia360 Ecosystem"
-              subtitle="The underlying software engine connecting student practice, diagnostic assessment, and analytical feedback loops."
+              title={t('technology.featuresTitle')}
+              subtitle={t('technology.featuresSubtitle')}
               align="center"
             />
 

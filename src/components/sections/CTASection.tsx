@@ -64,7 +64,7 @@ export const CTASection: React.FC = () => {
             <ScrollReveal delay={150}>
               <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 group">
                 <img
-                  src="/images/real-parent-student.jpg"
+                  src="/images/brainsetu-boy-learning.jpg"
                   alt="BrainSetu student mastering conceptual mathematics with illuminated cognitive brain model"
                   className="w-full h-auto object-cover object-center max-h-[480px] transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
