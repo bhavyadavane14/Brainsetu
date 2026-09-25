@@ -88,9 +88,21 @@ export const Signup: React.FC = () => {
 
 
             {error && (
-              <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-start gap-2.5">
-                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-500" />
-                <span>{error}</span>
+              <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex flex-col gap-1.5">
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-500" />
+                  <span className="font-medium leading-relaxed">{error}</span>
+                </div>
+                {(error.includes('authorized') || error.includes('domain')) && (
+                  <div className="mt-2 pt-2 border-t border-rose-200/80 text-[11px] text-rose-800">
+                    <p className="font-semibold mb-1">How to authorize localhost (30 seconds):</p>
+                    <ol className="list-decimal pl-4 space-y-0.5 text-[11px]">
+                      <li>Open <a href="https://console.firebase.google.com/project/brainsetu-1b363/authentication/settings" target="_blank" rel="noreferrer" className="underline font-bold text-rose-900 hover:text-black">Firebase Console &gt; Auth Settings</a></li>
+                      <li>Scroll to <strong>Authorized domains</strong> &gt; click <strong>Add domain</strong></li>
+                      <li>Type <code>localhost</code> and click <strong>Save</strong>.</li>
+                    </ol>
+                  </div>
+                )}
               </div>
             )}
 

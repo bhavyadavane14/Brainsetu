@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Play, Lightbulb, Brain, Users } from 'lucide-react';
+import { ExternalLink, Play } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { ScrollReveal } from '../common/ScrollReveal';
 import { useLanguage } from '../../context/LanguageContext';
@@ -9,24 +9,6 @@ export const VideoShowcaseSection: React.FC = () => {
   const videoId = 'H5YqeyASGCI';
   const youtubeUrl = `https://youtu.be/${videoId}`;
   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`;
-
-  const highlights = [
-    {
-      icon: Lightbulb,
-      title: t('video.feat1Title', 'Conceptual Clarity'),
-      desc: t('video.feat1Desc', 'First-principles mathematical reasoning that banishes rote memorization.'),
-    },
-    {
-      icon: Brain,
-      title: t('video.feat2Title', '10X Memory Power'),
-      desc: t('video.feat2Desc', 'Scientific concept chunking and neural recall techniques.'),
-    },
-    {
-      icon: Users,
-      title: t('video.feat3Title', 'Expert Mentorship'),
-      desc: t('video.feat3Desc', 'Dedicated mentors paired with adaptive digital practice tools.'),
-    },
-  ];
 
   return (
     <section 
@@ -99,28 +81,6 @@ export const VideoShowcaseSection: React.FC = () => {
             </div>
           </div>
         </ScrollReveal>
-
-        {/* 3 Quick Benefit Pillars */}
-        <div className="max-w-4xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-          {highlights.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <ScrollReveal key={idx} delay={200 + idx * 80}>
-                <div className="h-full p-5 rounded-2xl bg-white border border-slate-200/70 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 group">
-                  <div className="w-9 h-9 rounded-xl bg-brand-primary-subtle text-brand-primary flex items-center justify-center mb-3 group-hover:scale-105 group-hover:bg-cyan-50 group-hover:text-brand-secondary transition-all duration-300">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-sm font-display font-bold text-brand-primary-deep group-hover:text-brand-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-brand-slate-muted mt-1 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
 
       </div>
     </section>

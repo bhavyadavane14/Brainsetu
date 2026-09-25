@@ -213,6 +213,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error('Google sign-in popup was closed before completing.');
       } else if (err.code === 'auth/operation-not-allowed') {
         throw new Error('Google provider is not enabled in your Firebase Authentication Console.');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        throw new Error('This domain (localhost) is not yet authorized in your Firebase project. Please add "localhost" under Firebase Console > Authentication > Settings > Authorized domains.');
       } else {
         throw new Error(err.message || 'Google sign-in failed. Please try again.');
       }
