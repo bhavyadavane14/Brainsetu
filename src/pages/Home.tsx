@@ -3,6 +3,7 @@ import { SEO } from '../components/common/SEO';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ImpactSection } from '../components/sections/ImpactSection';
 import { WhyBrainSetuSection } from '../components/sections/WhyBrainSetuSection';
+import { VideoShowcaseSection } from '../components/sections/VideoShowcaseSection';
 import { LearningJourneySection } from '../components/sections/LearningJourneySection';
 import { ProgramsSection } from '../components/sections/ProgramsSection';
 import { TechEcosystemSection } from '../components/sections/TechEcosystemSection';
@@ -26,6 +27,9 @@ export const Home: React.FC = () => {
 
         {/* Section 3: Why BrainSetu */}
         <WhyBrainSetuSection />
+
+        {/* Section 3.5: Video Tour & Intellia 360 Showcase */}
+        <VideoShowcaseSection />
 
         {/* Section 4: Learning Journey */}
         <LearningJourneySection />

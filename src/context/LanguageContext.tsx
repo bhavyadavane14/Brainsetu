@@ -59,6 +59,18 @@ const translations: Record<Language, Record<string, string>> = {
     'why.benefit4Title': 'Problem-Solving & Technology',
     'why.benefit4Desc': 'Independent problem-solving heuristics supported by modern digital mathematics learning tools.',
 
+    // Video Showcase Section
+    'video.badge': 'Official Video Showcase',
+    'video.title': 'Experience BrainSetu in Action',
+    'video.subtitle': 'Watch how our cognitive development methodology and the Intellia 360 Mathematics Program transform conceptual clarity, analytical thinking, and lifelong confidence.',
+    'video.feat1Title': 'Conceptual Clarity',
+    'video.feat1Desc': 'First-principles mathematical reasoning that banishes rote memorization.',
+    'video.feat2Title': '10X Memory Power',
+    'video.feat2Desc': 'Scientific concept chunking and neural recall techniques.',
+    'video.feat3Title': 'Expert Mentorship',
+    'video.feat3Desc': 'Dedicated mentors paired with adaptive digital practice tools.',
+    'video.watchYoutube': 'Watch Directly on YouTube',
+
     // Learning Journey Section
     'journey.title': 'The Learning Journey',
     'journey.subtitle': 'A clear six-step cognitive progression that transforms new concepts into lifelong understanding and mastery.',
@@ -216,6 +228,18 @@ const translations: Record<Language, Record<string, string>> = {
     'why.benefit4Title': 'समस्या समाधान और तकनीक',
     'why.benefit4Desc': 'आधुनिक डिजिटल गणित शिक्षण उपकरणों द्वारा समर्थित स्वतंत्र समस्या-समाधान कौशल।',
 
+    // Video Showcase Section
+    'video.badge': 'आधिकारिक वीडियो प्रस्तुति',
+    'video.title': 'ब्रेनसेतु को कार्य में देखें',
+    'video.subtitle': 'देखें कि कैसे हमारी संज्ञानात्मक विकास पद्धति और इंटेलीया 360 प्रोग्राम छात्रों में गणितीय स्पष्टता, तार्किक सोच और आजीवन आत्मविश्वास का निर्माण करते हैं।',
+    'video.feat1Title': 'संकल्पनात्मक स्पष्टता',
+    'video.feat1Desc': 'मूल सिद्धांतों पर आधारित गणितीय तर्क जो रटने की आदत को समाप्त करता है।',
+    'video.feat2Title': '10X स्मरण तकनीक',
+    'video.feat2Desc': 'वैज्ञानिक संकल्पना चंकिंग और न्यूरल रिकॉल तकनीकें।',
+    'video.feat3Title': 'विशेषज्ञ मेंटरशिप',
+    'video.feat3Desc': 'अनुकूली डिजिटल अभ्यास उपकरणों के साथ समर्पित मार्गदर्शक।',
+    'video.watchYoutube': 'यूट्यूब पर सीधे देखें',
+
     // Learning Journey Section
     'journey.title': 'सीखने की यात्रा',
     'journey.subtitle': 'एक स्पष्ट छह-चरणीय संज्ञानात्मक प्रगति जो नई अवधारणाओं को स्थायी समझ और महारत में बदलती है।',
@@ -372,6 +396,18 @@ const translations: Record<Language, Record<string, string>> = {
     'why.benefit3Desc': 'वैज्ञानिक संकल्पना चंकिंग आणि सक्रिय आठवण पद्धती ज्या दीर्घकाळ लक्षात ठेवणे सोपे आणि तणावमुक्त करतात.',
     'why.benefit4Title': 'समस्या निवारण आणि तंत्रज्ञान',
     'why.benefit4Desc': 'आधुनिक डिजिटल गणित साधनांद्वारे समर्थित स्वतंत्र समस्या निवारण कौशल्ये.',
+
+    // Video Showcase Section
+    'video.badge': 'अधिकृत व्हिडिओ सादरीकरण',
+    'video.title': 'ब्रेनसेतुचे प्रत्यक्ष कार्य पहा',
+    'video.subtitle': 'आमची संज्ञानात्मक शिक्षण पद्धती आणि इंटेलीया ३६० मॅथेमॅटिक्स प्रोग्राम विद्यार्थ्यांमध्ये संकल्पनात्मक स्पष्टता, तार्किक विचार आणि आत्मविश्वास कसा घडवतात ते पहा.',
+    'video.feat1Title': 'संकल्पनात्मक स्पष्टता',
+    'video.feat1Desc': 'पाठांतर न करता मूळ सिद्धांतांवर आधारित गणितीय विचार.',
+    'video.feat2Title': '१० पट स्मरणशक्ती',
+    'video.feat2Desc': 'वैज्ञानिक संकल्पना चंकिंग आणि न्यूरल स्मरण तंत्रे.',
+    'video.feat3Title': 'तज्ज्ञ मार्गदर्शन',
+    'video.feat3Desc': 'आधुनिक डिजिटल सराव साधनांसह अनुभवी शिक्षकांचे वैयक्तिक लक्ष.',
+    'video.watchYoutube': 'थेट यूट्यूबवर पहा',
 
     // Learning Journey Section
     'journey.title': 'शिकण्याचा प्रवास',

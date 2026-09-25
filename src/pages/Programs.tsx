@@ -10,6 +10,7 @@ import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { programsData } from '../data/programs';
 import { EnquiryModal } from '../components/common/EnquiryModal';
 import { CTASection } from '../components/sections/CTASection';
+import { VideoShowcaseSection } from '../components/sections/VideoShowcaseSection';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Programs: React.FC = () => {
@@ -196,6 +197,9 @@ export const Programs: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Video Tour Section */}
+        <VideoShowcaseSection />
 
         {/* Global CTA Section */}
         <CTASection />

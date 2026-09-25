@@ -32,7 +32,9 @@ export const BrainSetuLogo: React.FC<BrainSetuLogoProps> = ({
           src={logoSrc}
           alt="BrainSetu Academy"
           className={`w-auto object-contain transition-all duration-200 group-hover:scale-[1.02] ${
-            isDark ? 'brightness-110 drop-shadow-[0_2px_8px_rgba(245,158,11,0.25)]' : 'drop-shadow-sm'
+            isDark 
+              ? 'brightness-110 drop-shadow-[0_2px_12px_rgba(245,158,11,0.3)]' 
+              : 'drop-shadow-[0_1px_3px_rgba(11,37,69,0.25)]'
           }`}
           style={{ height: `${iconSize}px` }}
         />
