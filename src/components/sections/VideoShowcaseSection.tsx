@@ -49,7 +49,6 @@ export const VideoShowcaseSection: React.FC = () => {
         <ScrollReveal>
           <div className="mb-12 sm:mb-16">
             <SectionHeader
-              badge={t('video.badge', 'Official Video Showcase')}
               title={t('video.title', 'Experience BrainSetu in Action')}
               subtitle={t(
                 'video.subtitle',

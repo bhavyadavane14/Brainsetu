@@ -22,14 +22,14 @@ export const Home: React.FC = () => {
         {/* Section 2: Hero */}
         <HeroSection />
 
-        {/* Section 2.5: Our Impact Statistics */}
+        {/* Section 2.5: Video Tour & Intellia 360 Showcase */}
+        <VideoShowcaseSection />
+
+        {/* Section 2.8: Proven Track Record of Excellence (Our Impact Statistics) */}
         <ImpactSection />
 
         {/* Section 3: Why BrainSetu */}
         <WhyBrainSetuSection />
-
-        {/* Section 3.5: Video Tour & Intellia 360 Showcase */}
-        <VideoShowcaseSection />
 
         {/* Section 4: Learning Journey */}
         <LearningJourneySection />

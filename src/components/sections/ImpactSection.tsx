@@ -95,7 +95,6 @@ export const ImpactSection: React.FC = () => {
         {/* Section Header with Scroll Reveal */}
         <ScrollReveal delay={0} className="mb-12 sm:mb-16">
           <SectionHeader
-            badge={t('impact.badge', 'Our Measurable Impact')}
             title={t('impact.title', 'Proven Track Record of Excellence')}
             subtitle={t(
               'impact.subtitle',
