@@ -2,13 +2,16 @@ import React from 'react';
 import { Home, BookOpen } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
 import { Button } from '../components/common/Button';
+import { useLanguage } from '../context/LanguageContext';
 
 export const NotFound: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <>
       <SEO
-        title="Page Not Found"
-        description="The page you are looking for does not exist on BrainSetu Academy."
+        title={t('notFound.title')}
+        description={t('notFound.desc')}
       />
 
       <main className="min-h-[70vh] flex items-center justify-center bg-brand-slate-bg py-16 px-4">
@@ -19,10 +22,10 @@ export const NotFound: React.FC = () => {
 
           <div>
             <h1 className="text-2xl font-display font-bold text-brand-primary-deep">
-              Bridge Path Not Found
+              {t('notFound.title')}
             </h1>
             <p className="text-sm text-brand-slate-muted mt-2 leading-relaxed">
-              We couldn’t find the page or concept you are searching for. Let’s reconnect you with our core learning pathways.
+              {t('notFound.desc')}
             </p>
           </div>
 
@@ -33,7 +36,7 @@ export const NotFound: React.FC = () => {
               size="md"
               icon={<Home className="w-4 h-4" />}
             >
-              Return Home
+              {t('notFound.returnHome')}
             </Button>
             <Button
               to="/programs"
@@ -41,7 +44,7 @@ export const NotFound: React.FC = () => {
               size="md"
               icon={<BookOpen className="w-4 h-4" />}
             >
-              Browse Programs
+              {t('notFound.browsePrograms')}
             </Button>
           </div>
         </div>

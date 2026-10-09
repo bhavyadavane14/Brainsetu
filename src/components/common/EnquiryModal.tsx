@@ -3,6 +3,7 @@ import { X, CheckCircle2, Send, Phone, MessageSquare, Mail } from 'lucide-react'
 import { Button } from './Button';
 import { programsData } from '../../data/programs';
 import { db, isFirebaseConfigured, collection, addDoc, serverTimestamp } from '../../lib/firebase';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -15,8 +16,9 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   isOpen,
   onClose,
   preselectedProgram = '',
-  modalTitle = 'Book a Counselling / Assessment Enquiry'
+  modalTitle
 }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     studentGrade: '',
@@ -94,18 +96,18 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <CheckCircle2 className="w-9 h-9" />
             </div>
             <h3 className="text-2xl font-display font-bold text-brand-primary-deep">
-              Enquiry Received!
+              {t('modals.successTitle')}
             </h3>
             <p className="mt-2 text-sm text-brand-slate-muted max-w-md mx-auto">
-              Thank you, <span className="font-semibold text-brand-navy-800">{formData.name || 'Parent'}</span>. Our senior academic counsellor will reach out via <span className="font-semibold text-brand-secondary">{formData.contactMethod}</span> within 24 hours to schedule your child’s diagnostic consultation.
+              {t('modals.successDesc')}
             </p>
             <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-brand-slate-muted text-left">
               <p><strong>Selected Track:</strong> {formData.program}</p>
-              <p className="mt-1"><strong>Status:</strong> Phase 1 Enquiry Logged (Stored in session preview)</p>
+              <p className="mt-1"><strong>Status:</strong> Phase 1 Enquiry Logged</p>
             </div>
             <div className="mt-6">
               <Button variant="primary" onClick={handleReset}>
-                Done
+                {t('modals.closeBtn')}
               </Button>
             </div>
           </div>
@@ -116,22 +118,22 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 Admissions & Guidance
               </span>
               <h3 className="text-xl sm:text-2xl font-display font-bold text-brand-primary-deep">
-                {modalTitle}
+                {modalTitle || t('modals.enquiryTitle')}
               </h3>
               <p className="text-xs sm:text-sm text-brand-slate-muted mt-1">
-                Take the first step toward conceptual mathematics clarity and lasting confidence.
+                {t('modals.enquirySub')}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                  Parent or Student Name *
+                  {t('contact.nameLabel')} *
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Ramesh Sharma"
+                  placeholder={t('contact.namePlaceholder')}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -141,12 +143,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                    Student Grade / Age *
+                    {t('contact.gradeLabel')} *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Grade 7 (Age 12)"
+                    placeholder={t('contact.gradePlaceholder')}
                     value={formData.studentGrade}
                     onChange={(e) => setFormData({ ...formData, studentGrade: e.target.value })}
                     className="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -154,12 +156,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                    Phone Number *
+                    {t('contact.phoneLabel')} *
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="e.g. +91 98765 43210"
+                    placeholder={t('contact.phonePlaceholder')}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -169,11 +171,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                  Email Address
+                  {t('contact.emailLabel')}
                 </label>
                 <input
                   type="email"
-                  placeholder="e.g. parent@example.com"
+                  placeholder={t('contact.emailPlaceholder')}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -182,7 +184,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                  Preferred Program
+                  {t('contact.programLabel')}
                 </label>
                 <select
                   value={formData.program}
@@ -200,7 +202,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1.5">
-                  Preferred Contact Channel
+                  {t('contact.methodLabel')}
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
@@ -230,11 +232,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-brand-navy-700 uppercase tracking-wider mb-1">
-                  Child’s Learning Goal or Current Challenge (Optional)
+                  {t('contact.messageLabel')}
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="e.g. Struggles with memorizing formulas, needs Olympiad foundation..."
+                  placeholder={t('contact.messagePlaceholder')}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-secondary focus:outline-none"
@@ -250,21 +252,13 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   disabled={loading}
                   icon={<Send className="w-4 h-4" />}
                 >
-                  {loading ? 'Submitting Enquiry...' : 'Submit Enquiry'}
+                  {loading ? t('contact.submittingBtn') : t('contact.submitBtn')}
                 </Button>
               </div>
 
               <div className="text-center pt-2 border-t border-slate-100 text-xs text-slate-500">
-                <span>Prefer to call directly? </span>
-                <a href="tel:+918805333303" className="font-semibold text-brand-primary hover:underline">
-                  +91 8805333303
-                </a>
-                <span> / </span>
-                <a href="tel:+919867063163" className="font-semibold text-brand-primary hover:underline">
-                  +91 9867063163
-                </a>
                 <p className="text-[11px] text-slate-400 mt-0.5">
-                  Feliz Flow Studio, Next to Hiranandani Trust School, Panvel – 410207
+                  {t('contact.privacyNotice')}
                 </p>
               </div>
             </form>

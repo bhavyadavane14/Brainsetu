@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { User, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { BrainSetuLogo } from '../assets/logo/BrainSetuLogo';
 import { Button } from '../components/common/Button';
 import { SEO } from '../components/common/SEO';
+import { LanguageSelector } from '../components/common/LanguageSelector';
 
 export const Signup: React.FC = () => {
   const [name, setName] = useState('');
@@ -16,6 +18,7 @@ export const Signup: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const { signup, loginWithGoogle } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,12 +28,12 @@ export const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !password) {
-      setError('Please fill in all required fields.');
+      setError(t('auth.fillRequired'));
       return;
     }
 
     if (password.length < 6) {
-      setError('Password should be at least 6 characters long.');
+      setError(t('auth.passwordLength'));
       return;
     }
 
@@ -69,16 +72,21 @@ export const Signup: React.FC = () => {
         description="Join BrainSetu Academy to unlock the Neural Memory Lab, personalized diagnostic evaluations, and interactive STEM learning modules."
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-brand-slate-bg via-white to-sky-50/50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-brand-slate-bg via-white to-sky-50/50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+        {/* Top bar with language selector */}
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-8 z-20">
+          <LanguageSelector />
+        </div>
+
         <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
           <div className="inline-block hover:opacity-90 transition-opacity">
             <BrainSetuLogo iconSize={44} />
           </div>
           <h1 className="mt-6 text-2xl sm:text-3xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-            Join BrainSetu Academy
+            {t('auth.signupTitle')}
           </h1>
           <p className="mt-2 text-sm text-brand-slate-muted">
-            Unlock the interactive Neural Memory Lab & continuous progress tracking
+            {t('auth.signupSubtitle')}
           </p>
         </div>
 
@@ -88,23 +96,12 @@ export const Signup: React.FC = () => {
             {/* Top Accent Bar */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-secondary via-brand-primary to-brand-accent"></div>
 
-
             {error && (
               <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex flex-col gap-1.5">
                 <div className="flex items-start gap-2.5">
                   <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-500" />
                   <span className="font-medium leading-relaxed">{error}</span>
                 </div>
-                {(error.includes('authorized') || error.includes('domain')) && (
-                  <div className="mt-2 pt-2 border-t border-rose-200/80 text-[11px] text-rose-800">
-                    <p className="font-semibold mb-1">How to authorize localhost (30 seconds):</p>
-                    <ol className="list-decimal pl-4 space-y-0.5 text-[11px]">
-                      <li>Open <a href="https://console.firebase.google.com/project/brainsetu-1b363/authentication/settings" target="_blank" rel="noreferrer" className="underline font-bold text-rose-900 hover:text-black">Firebase Console &gt; Auth Settings</a></li>
-                      <li>Scroll to <strong>Authorized domains</strong> &gt; click <strong>Add domain</strong></li>
-                      <li>Type <code>localhost</code> and click <strong>Save</strong>.</li>
-                    </ol>
-                  </div>
-                )}
               </div>
             )}
 
@@ -133,7 +130,7 @@ export const Signup: React.FC = () => {
                   d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
                 />
               </svg>
-              <span>Sign up with Google</span>
+              <span>{t('auth.googleSignIn')}</span>
             </button>
 
             <div className="relative my-6">
@@ -141,14 +138,14 @@ export const Signup: React.FC = () => {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-3 text-slate-400 font-medium tracking-wider">Or register with email</span>
+                <span className="bg-white px-3 text-slate-400 font-medium tracking-wider">{t('auth.orContinueWith')}</span>
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                  Full Name
+                  {t('auth.fullNameLabel')}
                 </label>
                 <div className="relative rounded-xl shadow-xs">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -159,7 +156,7 @@ export const Signup: React.FC = () => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Aarav Sharma"
+                    placeholder={t('auth.namePlaceholder')}
                     className="block w-full pl-10 pr-3 py-2.5 text-sm border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:border-brand-secondary"
                   />
                 </div>
@@ -167,7 +164,7 @@ export const Signup: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                  Email Address
+                  {t('auth.emailLabel')}
                 </label>
                 <div className="relative rounded-xl shadow-xs">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -178,7 +175,7 @@ export const Signup: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="student@example.com"
+                    placeholder={t('auth.emailPlaceholder')}
                     className="block w-full pl-10 pr-3 py-2.5 text-sm border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:border-brand-secondary"
                   />
                 </div>
@@ -186,7 +183,7 @@ export const Signup: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                  Password
+                  {t('auth.passwordLabel')}
                 </label>
                 <div className="relative rounded-xl shadow-xs">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -197,7 +194,7 @@ export const Signup: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="At least 6 characters"
+                    placeholder={t('auth.passwordPlaceholder')}
                     className="block w-full pl-10 pr-3 py-2.5 text-sm border border-slate-300 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:border-brand-secondary"
                   />
                 </div>
@@ -207,21 +204,21 @@ export const Signup: React.FC = () => {
               <div className="grid grid-cols-2 gap-3 pt-1">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Account Type
+                    {t('auth.accountTypeLabel')}
                   </label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'student' | 'parent')}
                     className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-xl text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-secondary"
                   >
-                    <option value="student">Student</option>
-                    <option value="parent">Parent</option>
+                    <option value="student">{t('auth.studentRole')}</option>
+                    <option value="parent">{t('auth.parentRole')}</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Target Level
+                    {t('auth.gradeLabel')}
                   </label>
                   <select
                     value={grade}
@@ -246,19 +243,19 @@ export const Signup: React.FC = () => {
                   disabled={submitting}
                   icon={<ArrowRight className="w-4 h-4" />}
                 >
-                  {submitting ? 'Creating Account...' : 'Create Account & Start Learning'}
+                  {submitting ? t('auth.creatingAccountBtn') : t('auth.createAccountBtn')}
                 </Button>
               </div>
             </form>
 
             <div className="mt-6 pt-6 border-t border-slate-100 text-center">
               <p className="text-xs text-slate-500">
-                Already have an account?{' '}
+                {t('auth.alreadyHaveAccount')}{' '}
                 <Link 
                   to={`/login?redirect=${encodeURIComponent(redirectPath)}`} 
                   className="font-bold text-brand-secondary hover:underline"
                 >
-                  Sign in here
+                  {t('auth.signInLink')}
                 </Link>
               </p>
             </div>
@@ -267,7 +264,7 @@ export const Signup: React.FC = () => {
 
           <div className="mt-6 text-center">
             <Link to="/" className="text-xs font-semibold text-slate-500 hover:text-brand-primary">
-              ← Return to BrainSetu Academy Homepage
+              ← {t('learningLab.returnHome')}
             </Link>
           </div>
         </div>

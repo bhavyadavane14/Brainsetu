@@ -16,11 +16,13 @@ import { programsData } from '../data/programs';
 import { Button } from '../components/common/Button';
 import { EnquiryModal } from '../components/common/EnquiryModal';
 import { CTASection } from '../components/sections/CTASection';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ProgramDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const { t } = useLanguage();
 
   const program = programsData.find((p) => p.slug === slug);
 
@@ -43,7 +45,7 @@ export const ProgramDetails: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <Breadcrumbs
               items={[
-                { label: 'Programs', to: '/programs' },
+                { label: t('nav.programs'), to: '/programs' },
                 { label: program.title },
               ]}
             />
@@ -71,7 +73,7 @@ export const ProgramDetails: React.FC = () => {
                     <div className="flex items-center gap-2 text-xs">
                       <span className="text-slate-400 line-through font-bold">{program.originalPrice}</span>
                       <span className="text-slate-500 line-through font-bold">{program.discountedPrice}</span>
-                      <span className="text-emerald-600 font-extrabold">100% FREE PASS</span>
+                      <span className="text-emerald-600 font-extrabold">{t('programDetails.freePass')}</span>
                     </div>
                   )}
                 </div>
@@ -95,14 +97,14 @@ export const ProgramDetails: React.FC = () => {
                     onClick={() => setEnquiryOpen(true)}
                     icon={<ArrowRight className="w-4 h-4" />}
                   >
-                    Enquire for {program.title}
+                    {t('programDetails.enquireNow')}
                   </Button>
                   <Button
                     to="/contact"
                     variant="outline"
                     size="lg"
                   >
-                    Book Diagnostic Assessment
+                    {t('nav.bookConsultation')}
                   </Button>
                 </div>
               </div>
@@ -110,12 +112,12 @@ export const ProgramDetails: React.FC = () => {
               {/* Quick Info Box */}
               <div className="lg:col-span-4 p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-card space-y-5">
                 <h3 className="text-base font-display font-bold text-brand-primary-deep pb-3 border-b border-slate-100">
-                  Program Overview Fast Facts
+                  {t('programDetails.overviewTitle')}
                 </h3>
 
                 <div className="space-y-3.5 text-xs sm:text-sm">
                   <div>
-                    <span className="text-brand-slate-muted block text-xs uppercase tracking-wider">Suitable For:</span>
+                    <span className="text-brand-slate-muted block text-xs uppercase tracking-wider">{t('programDetails.whoForTitle')}:</span>
                     <span className="font-semibold text-brand-navy-800">{program.suitableFor}</span>
                   </div>
                   <div>
@@ -157,7 +159,7 @@ export const ProgramDetails: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                      Who It Is For
+                      {t('programDetails.whoForTitle')}
                     </h3>
                     <p className="text-xs text-brand-slate-muted">Ideal learner profiles for this track</p>
                   </div>
@@ -181,7 +183,7 @@ export const ProgramDetails: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                      Skills Developed
+                      {t('programDetails.skillsTitle')}
                     </h3>
                     <p className="text-xs text-brand-slate-muted">Cognitive & mathematical capabilities gained</p>
                   </div>
@@ -209,8 +211,7 @@ export const ProgramDetails: React.FC = () => {
             <div>
               <SectionHeader
                 badge="Curriculum Experience"
-                title="Learning"
-                highlightText="Activities"
+                title={t('programDetails.activitiesTitle')}
                 subtitle="Hands-on interactive routines that transform passive listening into active mathematical discovery."
                 align="left"
               />
@@ -236,8 +237,7 @@ export const ProgramDetails: React.FC = () => {
             <div className="pt-8 border-t border-slate-200">
               <SectionHeader
                 badge="Structured Approach"
-                title="Pedagogical"
-                highlightText="Methodology"
+                title={t('programDetails.methodologyTitle')}
                 subtitle="Step-by-step framework to ensure every concept is cemented from first principles."
                 align="left"
               />
@@ -270,8 +270,7 @@ export const ProgramDetails: React.FC = () => {
               <div className="lg:col-span-7 space-y-4">
                 <SectionHeader
                   badge="Tangible Results"
-                  title="Expected"
-                  highlightText="Outcomes"
+                  title={t('programDetails.outcomesTitle')}
                   subtitle="How this program reshapes the student's cognitive confidence and academic competence."
                   align="left"
                 />
@@ -303,7 +302,7 @@ export const ProgramDetails: React.FC = () => {
                     className="w-full justify-center"
                     onClick={() => setEnquiryOpen(true)}
                   >
-                    Enquire Now / Book Diagnostic
+                    {t('nav.bookConsultation')}
                   </Button>
                 </div>
               </div>
@@ -318,7 +317,7 @@ export const ProgramDetails: React.FC = () => {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <SectionHeader
                 badge="Program FAQs"
-                title="Common Questions About"
+                title={t('programDetails.faqTitle')}
                 highlightText={program.title}
                 align="center"
               />
@@ -361,12 +360,12 @@ export const ProgramDetails: React.FC = () => {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h3 className="text-xl font-display font-bold text-brand-primary-deep">
-                  Explore Other Learning Programs
+                  {t('programDetails.otherPrograms')}
                 </h3>
                 <p className="text-xs text-brand-slate-muted">Curated complementary tracks</p>
               </div>
               <Link to="/programs" className="text-xs font-bold text-brand-secondary hover:text-brand-primary flex items-center gap-1">
-                <span>View All 6</span>
+                <span>{t('nav.programs')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -387,7 +386,7 @@ export const ProgramDetails: React.FC = () => {
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-200">
                     <Link to={`/programs/${other.slug}`} className="text-xs font-bold text-brand-secondary flex items-center gap-1">
-                      <span>Explore Program</span>
+                      <span>{t('programsPage.viewDetails')}</span>
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>

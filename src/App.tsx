@@ -17,6 +17,7 @@ import { LearningApproach } from './pages/LearningApproach';
 import { Technology } from './pages/Technology';
 import { StudentDevelopment } from './pages/StudentDevelopment';
 import { Parents } from './pages/Parents';
+import { Preschool } from './pages/Preschool';
 import { Contact } from './pages/Contact';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { Terms } from './pages/Terms';
@@ -43,6 +44,7 @@ const AppLayout: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/programs/:slug" element={<ProgramDetails />} />
+          <Route path="/preschool" element={<Preschool />} />
           <Route path="/learning-approach" element={<LearningApproach />} />
           <Route path="/technology" element={<Technology />} />
           <Route path="/student-development" element={<StudentDevelopment />} />

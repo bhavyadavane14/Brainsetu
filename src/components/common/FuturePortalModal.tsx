@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Lock, Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Button } from './Button';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface FuturePortalModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const FuturePortalModal: React.FC<FuturePortalModalProps> = ({
   const [role, setRole] = useState<'Student' | 'Parent' | 'Teacher'>(defaultRole);
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -80,10 +82,10 @@ export const FuturePortalModal: React.FC<FuturePortalModalProps> = ({
         </div>
 
         <h3 className="text-xl sm:text-2xl font-display font-bold text-brand-primary-deep">
-          BrainSetu Learning Hub & Portals
+          {t('modals.portalTitle')}
         </h3>
         <p className="mt-1 text-sm text-brand-slate-muted">
-          Our Phase 1 frontend is live. Secure authentication, LMS dashboards, and AI analytics are scheduled for the next phase.
+          {t('modals.portalDesc')}
         </p>
 
         {/* Role Selector Tabs */}

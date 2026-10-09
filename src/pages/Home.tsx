@@ -3,6 +3,7 @@ import { SEO } from '../components/common/SEO';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ImpactSection } from '../components/sections/ImpactSection';
 import { WhyBrainSetuSection } from '../components/sections/WhyBrainSetuSection';
+import { MemoryCoreValuesSection } from '../components/sections/MemoryCoreValuesSection';
 import { VideoShowcaseSection } from '../components/sections/VideoShowcaseSection';
 import { LearningJourneySection } from '../components/sections/LearningJourneySection';
 import { ProgramsSection } from '../components/sections/ProgramsSection';
@@ -30,6 +31,9 @@ export const Home: React.FC = () => {
 
         {/* Section 3: Why BrainSetu */}
         <WhyBrainSetuSection />
+
+        {/* Section 3.5: BrainSetu Memory Science Program – Core Values & Benefits */}
+        <MemoryCoreValuesSection />
 
         {/* Section 4: Learning Journey */}
         <LearningJourneySection />

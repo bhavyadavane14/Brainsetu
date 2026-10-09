@@ -2,18 +2,21 @@ import React from 'react';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
 import { siteConfig } from '../data/siteConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export const PrivacyPolicy: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <>
       <SEO
-        title="Privacy Policy"
+        title={t('nav.privacyPolicy')}
         description="BrainSetu Academy privacy and data protection policy for students, parents, and enquiries."
       />
 
       <main className="bg-brand-slate-bg min-h-screen py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs items={[{ label: 'Privacy Policy' }]} />
+          <Breadcrumbs items={[{ label: t('nav.privacyPolicy') }]} />
 
           <div className="mt-6 p-8 sm:p-12 rounded-3xl bg-white border border-slate-200 shadow-card space-y-6 text-sm text-brand-navy-700 leading-relaxed">
             <div>
@@ -21,7 +24,7 @@ export const PrivacyPolicy: React.FC = () => {
                 Legal & Privacy
               </span>
               <h1 className="text-2xl sm:text-3xl font-display font-extrabold text-brand-primary-deep mt-1">
-                Privacy Policy
+                {t('nav.privacyPolicy')}
               </h1>
               <p className="text-xs text-brand-slate-muted mt-1">
                 Last Updated: January 2026 • BrainSetu Academy

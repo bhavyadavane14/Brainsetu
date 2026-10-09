@@ -83,16 +83,19 @@ export const Footer: React.FC = () => {
                 <Link to="/" className="hover:text-cyan-300 transition-colors">{t('nav.home')}</Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-cyan-300 transition-colors">About Us</Link>
+                <Link to="/about" className="hover:text-cyan-300 transition-colors">{t('nav.about')}</Link>
               </li>
               <li>
                 <Link to="/programs" className="hover:text-cyan-300 transition-colors">{t('nav.programs')}</Link>
               </li>
               <li>
-                <Link to="/learning-approach" className="hover:text-cyan-300 transition-colors">Learning Approach</Link>
+                <Link to="/preschool" className="hover:text-cyan-300 transition-colors">{t('preschool.title')}</Link>
               </li>
               <li>
-                <Link to="/technology" className="hover:text-cyan-300 transition-colors">Technology & AI</Link>
+                <Link to="/learning-approach" className="hover:text-cyan-300 transition-colors">{t('nav.approach')}</Link>
+              </li>
+              <li>
+                <Link to="/technology" className="hover:text-cyan-300 transition-colors">{t('nav.tech')}</Link>
               </li>
               <li>
                 <Link to="/student-development" className="hover:text-cyan-300 transition-colors">{t('footer.studentDev')}</Link>
@@ -194,13 +197,13 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {siteConfig.copyrightYear} BrainSetu Academy. All rights reserved.</p>
+          <p>© {siteConfig.copyrightYear} {t('footer.rights')}</p>
           <div className="flex items-center space-x-6">
             <Link to="/privacy-policy" className="hover:text-cyan-300 transition-colors">
-              Privacy Policy
+              {t('nav.privacyPolicy')}
             </Link>
             <Link to="/terms" className="hover:text-cyan-300 transition-colors">
-              Terms & Conditions
+              {t('nav.terms')}
             </Link>
             <span className="text-slate-600">|</span>
             <span className="text-slate-400">Building Smarter Minds</span>

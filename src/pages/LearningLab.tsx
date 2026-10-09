@@ -9,12 +9,15 @@ import {
   RefreshCw
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { BrainSetuLogo } from '../assets/logo/BrainSetuLogo';
 import { SEO } from '../components/common/SEO';
 import { WelcomeModal } from '../components/common/WelcomeModal';
+import { LanguageSelector } from '../components/common/LanguageSelector';
 
 export const LearningLab: React.FC = () => {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const [welcomeModalOpen, setWelcomeModalOpen] = useState(true);
   const [iframeKey, setIframeKey] = useState(1);
   const navigate = useNavigate();
@@ -32,7 +35,7 @@ export const LearningLab: React.FC = () => {
   return (
     <>
       <SEO
-        title="Neural Memory Lab — BrainSetu Academy Student Portal"
+        title={`${t('nav.learningLab')} — BrainSetu Academy Student Portal`}
         description="Active interactive simulation environment bridging sensory exploration with lifelong memory mastery."
       />
 
@@ -48,10 +51,10 @@ export const LearningLab: React.FC = () => {
               <div className="h-6 w-px bg-slate-700 hidden sm:block"></div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-950 text-cyan-400 border border-cyan-800/80">
-                  Neural Memory Lab
+                  {t('nav.learningLab')}
                 </span>
                 <span className="text-xs text-slate-400 hidden lg:inline">
-                  (Module 3 • 100 Missions)
+                  (Module 3 • {t('learningLab.hudMissions')})
                 </span>
               </div>
             </div>
@@ -61,20 +64,22 @@ export const LearningLab: React.FC = () => {
               <div className="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center gap-2">
                 <Flame className="w-4 h-4 text-amber-400" />
                 <span className="font-semibold text-slate-200">
-                  Streak: <strong className="text-amber-400 font-bold">{user?.streak || 1} Days</strong>
+                  {t('nav.streak')}: <strong className="text-amber-400 font-bold">{user?.streak || 1} {t('nav.days')}</strong>
                 </span>
               </div>
 
               <div className="px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-cyan-400" />
                 <span className="font-semibold text-slate-200">
-                  Sparks: <strong className="text-cyan-300 font-bold">{user?.xp || 150} XP</strong>
+                  {t('nav.sparks')}: <strong className="text-cyan-300 font-bold">{user?.xp || 150} XP</strong>
                 </span>
               </div>
             </div>
 
             {/* Right: User Profile & Actions */}
             <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+              <LanguageSelector className="text-slate-800" />
+
               <div className="flex items-center gap-2 text-right">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-secondary to-brand-primary flex items-center justify-center text-white font-bold text-xs shadow-sm">
                   {user?.displayName ? user.displayName.charAt(0).toUpperCase() : 'S'}
@@ -94,7 +99,7 @@ export const LearningLab: React.FC = () => {
               <Link
                 to="/"
                 className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-                title="Return to Main Website"
+                title={t('learningLab.returnHome')}
               >
                 <Home className="w-4 h-4" />
               </Link>
@@ -105,7 +110,7 @@ export const LearningLab: React.FC = () => {
                 title="Sign out of BrainSetu Academy"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Logout</span>
+                <span className="hidden sm:inline">{t('nav.logout')}</span>
               </button>
             </div>
 

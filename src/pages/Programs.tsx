@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  ArrowRight,
-  Check,
-  BookOpen
+  ArrowRight, 
+  Check, 
+  BookOpen 
 } from 'lucide-react';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -37,7 +37,7 @@ export const Programs: React.FC = () => {
         {/* Header Breadcrumb */}
         <div className="bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Breadcrumbs items={[{ label: 'Programs' }]} />
+            <Breadcrumbs items={[{ label: t('nav.programs') }]} />
           </div>
         </div>
 
@@ -45,10 +45,10 @@ export const Programs: React.FC = () => {
         <section className="py-14 sm:py-20 bg-gradient-to-b from-white via-brand-slate-bluebg/50 to-brand-slate-bg text-center">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-brand-primary-deep tracking-tight">
-              Programs Designed for <span className="text-gradient">Smarter Learning</span>
+              {t('programsPage.title')} <span className="text-gradient">{t('programsPage.highlight')}</span>
             </h1>
             <p className="text-base sm:text-lg text-brand-slate-muted max-w-2xl mx-auto">
-              Choose between our free high-impact memory masterclass or our comprehensive full-year conceptual mathematics curriculum.
+              {t('programsPage.subtitle')}
             </p>
           </div>
         </section>
@@ -91,7 +91,7 @@ export const Programs: React.FC = () => {
                     {/* Highlights */}
                     <div className="space-y-3.5 pt-4 border-t border-slate-100">
                       <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                        What You Will Master:
+                        {t('programsPage.masterListTitle')}
                       </h3>
                       {webinar.keyHighlights.map((hl, idx) => (
                         <div key={idx} className="flex items-start gap-3">
@@ -121,7 +121,7 @@ export const Programs: React.FC = () => {
                         to={`/programs/${webinar.slug}`}
                         className="text-xs font-semibold text-brand-secondary hover:underline inline-flex items-center gap-1"
                       >
-                        <span>View Detailed Webinar Overview</span>
+                        <span>{t('programsPage.viewDetails')}</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -136,7 +136,7 @@ export const Programs: React.FC = () => {
                     {/* Top Tag & Level */}
                     <div className="flex items-center justify-between mb-6">
                       <span className="px-3.5 py-1.5 rounded-full bg-cyan-100 text-brand-primary-deep font-extrabold text-xs tracking-wider uppercase border border-cyan-200">
-                        Flagship Academic Program
+                        {t('programsPage.flagshipBadge')}
                       </span>
                       <span className="text-xs font-semibold text-cyan-800 bg-white/90 px-3 py-1 rounded-lg border border-slate-200">
                         {mathProgram.level}
@@ -153,7 +153,7 @@ export const Programs: React.FC = () => {
                     {/* Highlights */}
                     <div className="space-y-3.5 pt-4 border-t border-slate-100">
                       <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                        Core Program Pillars:
+                        {t('programsPage.curriculumTitle')}
                       </h3>
                       {mathProgram.keyHighlights.map((hl, idx) => (
                         <div key={idx} className="flex items-start gap-3">
@@ -183,7 +183,7 @@ export const Programs: React.FC = () => {
                         to={`/programs/${mathProgram.slug}`}
                         className="text-xs font-semibold text-brand-secondary hover:underline inline-flex items-center gap-1"
                       >
-                        <span>View Full Syllabus & Methodology</span>
+                        <span>{t('programsPage.viewMathDetails')}</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>

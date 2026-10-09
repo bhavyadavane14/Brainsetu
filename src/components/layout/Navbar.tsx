@@ -12,7 +12,8 @@ import {
   Phone, 
   MapPin,
   Shield, 
-  FileText 
+  FileText,
+  Sparkles 
 } from 'lucide-react';
 import { BrainSetuLogo } from '../../assets/logo/BrainSetuLogo';
 import { InstagramIcon } from '../common/SocialIcons';
@@ -58,11 +59,13 @@ export const Navbar: React.FC = () => {
   const primaryLinks = [
     { name: t('nav.home'), path: '/' },
     { name: t('nav.programs'), path: '/programs' },
+    { name: t('preschool.title'), path: '/preschool' },
     { name: t('nav.contact'), path: '/contact' },
   ];
 
   // Drawer menu links
   const drawerLinks = [
+    { name: t('preschool.title'), path: '/preschool', icon: Sparkles, desc: t('preschool.subtitle') },
     { name: t('nav.about'), path: '/about', icon: Info, desc: t('nav.aboutDesc') },
     { name: t('nav.approach'), path: '/learning-approach', icon: GraduationCap, desc: t('nav.approachDesc') },
     { name: t('nav.tech'), path: '/technology', icon: Cpu, desc: t('nav.techDesc') },
@@ -85,39 +88,41 @@ export const Navbar: React.FC = () => {
             : 'border-b border-slate-100 py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Brand Logo */}
-            <div className="flex-shrink-0">
-              <BrainSetuLogo iconSize={64} />
+        <div className="w-full max-w-7xl lg:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between w-full">
+            {/* Left side: Brand Logo + Desktop Nav features grouped */}
+            <div className="flex items-center gap-6 lg:gap-10">
+              <div className="flex-shrink-0">
+                <BrainSetuLogo iconSize={64} />
+              </div>
+
+              {/* Desktop Navigation: Prominent, larger feature links */}
+              <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-3">
+                {primaryLinks.map((link) => (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    className={({ isActive }) =>
+                      `px-3.5 lg:px-4 py-2 rounded-xl text-base lg:text-[18px] font-bold tracking-tight transition-all duration-150 ${
+                        isActive
+                          ? 'text-brand-primary-deep bg-slate-100 font-extrabold shadow-2xs'
+                          : 'text-brand-navy-800 hover:text-brand-primary hover:bg-slate-50'
+                      }`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                ))}
+              </nav>
             </div>
 
-            {/* Desktop: ONLY Home, Programs, Contact */}
-            <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
-              {primaryLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                      isActive
-                        ? 'text-brand-primary-deep font-bold bg-slate-100'
-                        : 'text-brand-navy-700 hover:text-brand-primary hover:bg-slate-50'
-                    }`
-                  }
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Actions: Auth + Enquire Now + Language Dropdown + ☰ Menu button */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Dynamic Auth CTA */}
+            {/* Right side: 4 Action Buttons shifted fully to the right */}
+            <div className="flex items-center gap-2 sm:gap-3.5 ml-auto flex-shrink-0">
+              {/* 1. Dynamic Auth CTA (Sign In / Learning Lab) */}
               {user ? (
                 <Link
                   to="/learning-lab"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-brand-primary border border-cyan-200 text-xs sm:text-sm font-bold transition-colors shadow-xs"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-brand-primary border border-cyan-200 text-sm sm:text-base font-bold transition-colors shadow-xs"
                   title="Open Neural Memory Lab"
                 >
                   <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
@@ -126,34 +131,34 @@ export const Navbar: React.FC = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold text-brand-navy-700 hover:text-brand-primary hover:bg-slate-100 transition-colors"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm sm:text-base font-bold text-brand-navy-700 hover:text-brand-primary hover:bg-slate-100 transition-colors"
                 >
                   <span>{t('nav.signIn')}</span>
                 </Link>
               )}
 
-              {/* Enquire Now Button */}
+              {/* 2. Enquire Now Button */}
               <Button
                 variant="accent"
                 size="sm"
                 onClick={() => setEnquiryModalOpen(true)}
-                className="text-xs sm:text-sm px-3 sm:px-4 py-2"
+                className="text-sm sm:text-base font-bold px-4 sm:px-5 py-2 sm:py-2.5 shadow-sm"
               >
                 {t('nav.enquireNow')}
               </Button>
 
-              {/* Language Selection Dropdown (Hindi, English, Marathi) */}
+              {/* 3. Language Selection Dropdown (Hindi, English, Marathi) */}
               <LanguageSelector />
 
-              {/* Hamburger Menu Trigger */}
+              {/* 4. Hamburger Menu Trigger */}
               <button
                 type="button"
                 onClick={() => setMenuOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-secondary"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 sm:py-2.5 rounded-xl text-sm sm:text-base font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-secondary cursor-pointer"
                 aria-label="Open Navigation Menu"
                 aria-expanded={menuOpen}
               >
-                <Menu className="w-4 h-4 text-brand-primary-deep" />
+                <Menu className="w-4.5 h-4.5 text-brand-primary-deep" />
                 <span className="hidden sm:inline">{t('nav.menu')}</span>
               </button>
             </div>
@@ -255,67 +260,88 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Quick Navigation Links */}
-              <div className="p-5 space-y-1">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pb-2">
+              <div className="p-5 space-y-1.5">
+                <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-400 px-3 pb-2">
                   {t('nav.navigation')}
                 </div>
 
                 <NavLink
                   to="/"
+                  onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-colors ${
+                    `flex items-center justify-between p-3.5 rounded-xl text-base sm:text-[17px] font-bold transition-colors ${
                       isActive
-                        ? 'bg-slate-100 text-brand-primary-deep font-bold'
+                        ? 'bg-slate-100 text-brand-primary-deep font-extrabold'
                         : 'text-brand-navy-800 hover:bg-slate-50'
                     }`
                   }
                 >
                   <span>{t('nav.home')}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ArrowRight className="w-4 h-4 text-slate-400" />
                 </NavLink>
 
                 <NavLink
                   to="/programs"
+                  onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-colors ${
+                    `flex items-center justify-between p-3.5 rounded-xl text-base sm:text-[17px] font-bold transition-colors ${
                       isActive
-                        ? 'bg-slate-100 text-brand-primary-deep font-bold'
+                        ? 'bg-slate-100 text-brand-primary-deep font-extrabold'
                         : 'text-brand-navy-800 hover:bg-slate-50'
                     }`
                   }
                 >
                   <span>{t('nav.programsMasterclasses')}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ArrowRight className="w-4 h-4 text-slate-400" />
+                </NavLink>
+
+                <NavLink
+                  to="/preschool"
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `flex items-center justify-between p-3.5 rounded-xl text-base sm:text-[17px] font-bold transition-colors ${
+                      isActive
+                        ? 'bg-amber-50 text-amber-900 font-extrabold'
+                        : 'text-brand-navy-800 hover:bg-amber-50/50'
+                    }`
+                  }
+                >
+                  <span className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    <span>{t('preschool.title')}</span>
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-amber-500" />
                 </NavLink>
 
                 <div className="pt-3 pb-1">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pb-2">
+                  <div className="text-[12px] font-extrabold uppercase tracking-wider text-slate-400 px-3 pb-2">
                     {t('nav.explore')}
                   </div>
                 </div>
 
-                {drawerLinks.map((item) => {
+                {drawerLinks.map((item: any) => {
                   const Icon = item.icon;
                   return (
                     <NavLink
                       key={item.path}
                       to={item.path}
+                      onClick={() => setMenuOpen(false)}
                       className={({ isActive }) =>
-                        `flex items-start gap-3 p-3 rounded-xl text-sm transition-colors ${
+                        `flex items-start gap-3.5 p-3 rounded-xl transition-colors ${
                           isActive
-                            ? 'bg-cyan-50/80 text-brand-secondary font-bold'
+                            ? 'bg-cyan-50/90 text-brand-secondary font-bold'
                             : 'text-brand-navy-800 hover:bg-slate-50'
                         }`
                       }
                     >
-                      <div className="w-8 h-8 rounded-lg bg-slate-100 text-brand-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4" />
+                      <div className="w-9 h-9 rounded-xl bg-slate-100 text-brand-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Icon className="w-4.5 h-4.5" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm leading-tight text-brand-primary-deep">
+                        <p className="font-bold text-base leading-snug text-brand-primary-deep">
                           {item.name}
                         </p>
-                        <p className="text-xs text-brand-slate-muted truncate mt-0.5">
+                        <p className="text-xs sm:text-sm text-brand-slate-muted truncate mt-0.5">
                           {item.desc}
                         </p>
                       </div>
