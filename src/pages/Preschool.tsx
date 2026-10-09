@@ -44,30 +44,30 @@ export const Preschool: React.FC = () => {
                   <span>{t('preschool.badge')}</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.12]">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.15]">
                   {t('preschool.title')}
                 </h1>
 
-                <p className="text-lg sm:text-xl md:text-2xl font-bold text-amber-300 leading-snug">
+                <p className="text-base sm:text-xl md:text-2xl font-bold text-amber-300 leading-snug">
                   {t('preschool.subtitle')}
                 </p>
 
-                <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal">
                   {t('preschool.intro')}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-3">
                   <button
                     type="button"
                     onClick={() => setEnquiryOpen(true)}
-                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-brand-navy-950 font-bold text-base shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-brand-navy-950 font-bold text-sm sm:text-base shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer"
                   >
                     <PhoneCall className="w-5 h-5 text-brand-navy-950" />
                     <span>{t('preschool.enquirePartnership')}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
-                  <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-200 font-semibold bg-white/10 px-4 py-3 rounded-xl border border-white/15 backdrop-blur-md">
+                  <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-slate-200 font-semibold bg-white/10 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-white/15 backdrop-blur-md">
                     <div className="flex items-center gap-1.5">
                       <Heart className="w-4 h-4 text-rose-400" />
                       <span>Ages 2–6 Yrs</span>
@@ -82,7 +82,7 @@ export const Preschool: React.FC = () => {
               </div>
 
               {/* Right Column: Featured High-Resolution Classroom Image Card */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-5 mt-4 sm:mt-6 lg:mt-0 max-w-lg mx-auto lg:max-w-none w-full">
                 <div className="relative">
                   {/* Subtle warm glow behind the card */}
                   <div className="absolute -inset-2 bg-gradient-to-r from-amber-400/20 to-teal-400/20 rounded-3xl blur-xl opacity-75" />
@@ -92,16 +92,16 @@ export const Preschool: React.FC = () => {
                     <img
                       src="/images/preschool-hero.jpg"
                       alt="BrainSetu Preschool Learning Environment"
-                      className="w-full h-auto max-h-[460px] object-cover object-center transition-transform duration-700 hover:scale-105"
+                      className="w-full h-auto max-h-[340px] sm:max-h-[420px] lg:max-h-[460px] object-cover object-center transition-transform duration-700 hover:scale-105"
                       loading="eager"
                     />
                     {/* Bottom overlay with highlights */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-4 sm:p-5 flex items-center justify-between text-white">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-3.5 sm:p-5 flex items-center justify-between text-white">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-pulse" />
                         <span className="text-xs sm:text-sm font-bold tracking-wide">Multi-Sensory Discovery</span>
                       </div>
-                      <span className="text-xs bg-amber-400/25 text-amber-300 px-3 py-1 rounded-full font-bold border border-amber-400/40">
+                      <span className="text-[11px] sm:text-xs bg-amber-400/25 text-amber-300 px-2.5 sm:px-3 py-1 rounded-full font-bold border border-amber-400/40">
                         Intelligent Play
                       </span>
                     </div>

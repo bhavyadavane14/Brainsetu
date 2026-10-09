@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, 
   Heart, 
   Brain, 
   Cpu, 
@@ -171,60 +170,16 @@ export const PreschoolSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Hero Area */}
-        <ScrollReveal>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs font-extrabold uppercase tracking-wider shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                <span>{t('preschool.badge')}</span>
-              </div>
+        {/* Inspirational Tagline Banner */}
+        <div className="mb-8 sm:mb-12 text-center max-w-3xl mx-auto">
+          <blockquote className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50/60 to-amber-50 border border-amber-200 text-amber-950 font-display font-extrabold text-base sm:text-xl italic shadow-xs">
+            {t('preschool.tagline')}
+          </blockquote>
+        </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-brand-primary-deep tracking-tight">
-                {t('preschool.title')}
-              </h2>
-
-              <p className="text-lg sm:text-xl font-bold text-brand-secondary">
-                {t('preschool.subtitle')}
-              </p>
-
-              <blockquote className="p-4 rounded-2xl bg-amber-50/80 border-l-4 border-amber-400 text-amber-950 font-display font-extrabold text-base sm:text-lg italic shadow-xs">
-                {t('preschool.tagline')}
-              </blockquote>
-
-              <div className="space-y-3 pt-2 text-sm sm:text-base text-brand-slate-muted leading-relaxed">
-                <p>{t('preschool.intro1')}</p>
-                <p>{t('preschool.intro2')}</p>
-                <p className="font-medium text-brand-navy-700">{t('preschool.intro3')}</p>
-              </div>
-            </div>
-
-            {/* Generated Image: Preschool Hero */}
-            <div className="lg:col-span-5">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 group relative">
-                <img
-                  src="/images/preschool-hero.jpg"
-                  alt="BrainSetu Preschool children exploring joyful experiential learning with teacher"
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-white/60 shadow-sm flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-amber-400 text-slate-900 font-black text-sm flex items-center justify-center flex-shrink-0">
-                    12
-                  </div>
-                  <div className="text-xs leading-tight">
-                    <span className="font-bold text-slate-900 block">Intelligent, Mindful, Confident</span>
-                    <span className="text-slate-500">{t('preschool.statYears')}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        {/* Navigation Tabs for 8 Subsections */}
-        <div className="mb-14 overflow-x-auto pb-2 scrollbar-none">
-          <div className="flex items-center gap-2 min-w-max border-b border-slate-200 pb-3">
+        {/* Navigation Tabs for 8 Subsections: Responsive across Mobile & Laptop */}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex flex-nowrap lg:flex-wrap items-center gap-2 overflow-x-auto pb-3 sm:pb-4 border-b border-slate-200/90 scrollbar-none">
             {[
               { id: 'pillars', label: '1. Four Pillars' },
               { id: 'ecosystem', label: '2. Learning Ecosystem' },
@@ -239,7 +194,7 @@ export const PreschoolSection: React.FC = () => {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                   activeTab === tab.id
                     ? 'bg-brand-primary-deep text-white shadow-md shadow-brand-primary-deep/20 scale-102'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'

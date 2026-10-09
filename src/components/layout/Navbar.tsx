@@ -88,22 +88,22 @@ export const Navbar: React.FC = () => {
             : 'border-b border-slate-100 py-4'
         }`}
       >
-        <div className="w-full max-w-7xl lg:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl lg:max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between w-full">
             {/* Left side: Brand Logo + Desktop Nav features grouped */}
-            <div className="flex items-center gap-6 lg:gap-10">
+            <div className="flex items-center gap-3 sm:gap-6 lg:gap-8 xl:gap-10">
               <div className="flex-shrink-0">
-                <BrainSetuLogo iconSize={64} />
+                <BrainSetuLogo iconSize={56} />
               </div>
 
               {/* Desktop Navigation: Prominent, larger feature links */}
-              <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-3">
+              <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
                 {primaryLinks.map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
                     className={({ isActive }) =>
-                      `px-3.5 lg:px-4 py-2 rounded-xl text-base lg:text-[18px] font-bold tracking-tight transition-all duration-150 ${
+                      `px-3 xl:px-4 py-2 rounded-xl text-sm xl:text-base 2xl:text-[17px] font-bold tracking-tight transition-all duration-150 ${
                         isActive
                           ? 'text-brand-primary-deep bg-slate-100 font-extrabold shadow-2xs'
                           : 'text-brand-navy-800 hover:text-brand-primary hover:bg-slate-50'
@@ -117,12 +117,12 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Right side: 4 Action Buttons shifted fully to the right */}
-            <div className="flex items-center gap-2 sm:gap-3.5 ml-auto flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 ml-auto flex-shrink-0">
               {/* 1. Dynamic Auth CTA (Sign In / Learning Lab) */}
               {user ? (
                 <Link
                   to="/learning-lab"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-brand-primary border border-cyan-200 text-sm sm:text-base font-bold transition-colors shadow-xs"
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-brand-primary border border-cyan-200 text-xs sm:text-sm lg:text-base font-bold transition-colors shadow-xs"
                   title="Open Neural Memory Lab"
                 >
                   <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
@@ -131,7 +131,7 @@ export const Navbar: React.FC = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm sm:text-base font-bold text-brand-navy-700 hover:text-brand-primary hover:bg-slate-100 transition-colors"
+                  className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm lg:text-base font-bold text-brand-navy-700 hover:text-brand-primary hover:bg-slate-100 transition-colors"
                 >
                   <span>{t('nav.signIn')}</span>
                 </Link>
@@ -142,7 +142,7 @@ export const Navbar: React.FC = () => {
                 variant="accent"
                 size="sm"
                 onClick={() => setEnquiryModalOpen(true)}
-                className="text-sm sm:text-base font-bold px-4 sm:px-5 py-2 sm:py-2.5 shadow-sm"
+                className="text-xs sm:text-sm lg:text-base font-bold px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 shadow-sm whitespace-nowrap"
               >
                 {t('nav.enquireNow')}
               </Button>
@@ -154,11 +154,11 @@ export const Navbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setMenuOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 sm:py-2.5 rounded-xl text-sm sm:text-base font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-secondary cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3.5 sm:py-2 lg:py-2.5 rounded-xl text-xs sm:text-sm lg:text-base font-bold text-brand-navy-800 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-secondary cursor-pointer"
                 aria-label="Open Navigation Menu"
                 aria-expanded={menuOpen}
               >
-                <Menu className="w-4.5 h-4.5 text-brand-primary-deep" />
+                <Menu className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-brand-primary-deep" />
                 <span className="hidden sm:inline">{t('nav.menu')}</span>
               </button>
             </div>
